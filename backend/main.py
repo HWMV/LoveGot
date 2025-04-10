@@ -20,3 +20,4 @@ class MyHandler(http.server.SimpleHTTPRequestHandler):
 with socketserver.TCPServer(("", PORT), MyHandler) as httpd:
     print(f"Serving on port {PORT}...")
     httpd.serve_forever()
+

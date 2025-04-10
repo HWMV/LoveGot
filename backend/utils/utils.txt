@@ -1,1 +1,16 @@
 ## 기능 Function 개발 폴더
+
+
+## Request Cart Function
+
+1. Agent data format
+
+input (post) => user_input : "치약 좀 중간부터 짜지마!"
+
+output (post) => gpt_answer = 
+
+{ "user_input" = user_input,
+"Answer1" : "난 중간부터 치약이 짜있으면 속상해!"
+"Answer2" : "예쁜말2",
+"Answer3" : "나는 중간부터 치약을 짜줬으면 좋겠어!"
+}
