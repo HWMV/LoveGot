@@ -2,6 +2,23 @@
 
 ## Project Structure
 
+### backend strucuture
+
+```
+backend/
+ ┣ main.py
+ ┣ agent/
+ ┃  ┣ agent.py
+ ┃  ┗ agentconfig.py
+ ┣ utils/
+ ┃  ┗ __init__.py
+ ┃  ┗ utils.txt
+ ┣ data/
+ ┃  ┗ data.txt
+ ┗ ...
+```
+
+
 ```
 LoveGot/
 ├── frontend/                    # Flutter frontend application
