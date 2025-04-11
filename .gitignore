@@ -5,3 +5,19 @@ venv/
 backend/dockerfile
 
 # Flutter (frontend gitignore integration)
+
+# 이미지 관련
+*.png
+!frontend/assets/images/*.png
+*.jpg
+!frontend/assets/images/*.jpg
+*.jpeg
+!frontend/assets/images/*.jpeg
+*.gif
+!frontend/assets/images/*.gif
+*.svg
+!frontend/assets/images/*.svg
+
+# macOS system files
+.DS_Store
+**/.DS_Store
