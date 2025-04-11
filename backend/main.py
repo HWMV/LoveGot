@@ -1,23 +1,64 @@
-# App backend (server) 실행을 위한 스크립트
-# 추후 기능들을 확장적으로 엔드포인트들을 추가 
-
 # main.py
-import http.server
-import socketserver
 import os
+from fastapi import FastAPI
+from pydantic import BaseModel
+import uvicorn
+from typing import Dict
+from fastapi.middleware.cors import CORSMiddleware
 
-# Cloud Run에서 기본으로 PORT=8080 환경 변수를 전달합니다.
-PORT = int(os.environ.get("PORT", 8080))
+# agent.py와 agentconfig.py는 이미 존재한다고 가정
+from agent.agent import GottmanAgent
 
-# 간단한 기본 핸들러 (http://YOUR_URL/ 접속 시 "Hello World" 등 반환)
-class MyHandler(http.server.SimpleHTTPRequestHandler):
-    def do_GET(self):
-        self.send_response(200)
-        self.send_header("Content-type", "text/plain; charset=utf-8")
-        self.end_headers()
-        self.wfile.write(b"Hello from LoveGot backend!\n")
+app = FastAPI()
+agent = GottmanAgent()
 
-with socketserver.TCPServer(("", PORT), MyHandler) as httpd:
-    print(f"Serving on port {PORT}...")
-    httpd.serve_forever()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # 또는 특정 도메인 리스트
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
+# 사용자 요청 형식
+# (2) 요청 바디 정의
+class RequestBody(BaseModel):
+    user_input: str
+
+# (3) 응답 바디 정의 (샘플)
+class ResponseBody(BaseModel):
+    user_input: str
+    Answer1: str
+    Answer2: str
+    Answer3: str
+
+@app.get("/")
+def root():
+    """
+    간단한 헬스체크용 엔드포인트
+    """
+    return {"message": "Hello from LoveGot backend via FastAPI!"}
+
+@app.post("/request_card")
+def create_statements(request: RequestBody) -> Dict:
+    """
+    user_input을 받아서 긍정적 화법 3문장을 생성해 반환
+    """
+    user_input = request.user_input
+    print(f"Received request with user_input: {user_input}")
+
+    # agent의 함수 호출
+    answer1, answer2, answer3 = agent.generate_positive_statements(user_input)
+
+    # 원하는 형태의 JSON 반환
+    return {
+        "user_input": user_input,
+        "Answer1": answer1,
+        "Answer2": answer2,
+        "Answer3": answer3,
+    }
+
+if __name__ == "__main__":
+    # Cloud Run에서는 환경 변수 PORT=8080을 사용
+    port = int(os.getenv("PORT", 8080))
+    uvicorn.run(app, host="0.0.0.0", port=port)

@@ -5,7 +5,7 @@
 
 1. Agent data format
 
-input (post) => user_input : "치약 좀 중간부터 짜지마!"
+input (post) => user_input : "치약 좀 중간부터 짜지마!🥰"
 
 output (post) => gpt_answer = 
 
@@ -22,7 +22,7 @@ output (post) => gpt_answer =
 2. 질문지는 연인에 대한 정보를 맞추는 기능 (예시 : 요즘 최애 야식 메뉴는? 떡볶이)
 3. 연인이 카드를 받고 정답/오답을 버튼으로 평가
 
-1. Data format
+1. Data flow
 
 - 13시에 질문지 질문 프론트로 전송
 - 수신인 답변 작성
