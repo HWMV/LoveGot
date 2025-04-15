@@ -4,8 +4,9 @@ import '../widgets/anniversary_widget.dart';
 import '../widgets/pet_widget.dart';
 import '../widgets/affection_level_widget.dart';
 import '../widgets/countdown_widget.dart';
-import '../../../widgets/bottom_nav_bar.dart';
-import '../widgets/request_dialog.dart';
+import '../../../shared/widgets/bottom_nav_bar.dart';
+import '../../request_card/ui/request_modal.dart';
+import '../widgets/compliment_dialog.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -18,10 +19,10 @@ class _HomeScreenState extends State<HomeScreen> {
   // Sample data (would be fetched from backend in a real app)
   final DateTime anniversaryDate = DateTime(2024, 1, 1);
   final String myNickname = "나";
-  final String partnerNickname = "그대";
+  final String partnerNickname = "연인";
   final int affectionLevel = 76;
   final DateTime nextSpecialDay = DateTime(2024, 7, 20);
-  final String specialDayName = "100일";
+  final String specialDayName = "기념일";
   int _selectedIndex = 0;
 
   Future<void> _showRequestDialog() async {
@@ -34,6 +35,18 @@ class _HomeScreenState extends State<HomeScreen> {
       // TODO: Handle the selected request
       print('Original: ${result['original']}');
       print('Improved: ${result['improved']}');
+    }
+  }
+
+  Future<void> _showComplimentDialog() async {
+    final result = await showDialog(
+      context: context,
+      builder: (context) => const ComplimentDialog(),
+    );
+
+    if (result != null) {
+      // TODO: Handle the compliment
+      print('Compliment: ${result['compliment']}');
     }
   }
 
@@ -84,11 +97,30 @@ class _HomeScreenState extends State<HomeScreen> {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton(
+                    onPressed: _showComplimentDialog,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.pink.shade200,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 12,
+                      ),
+                    ),
+                    child: const Text('칭찬카드'),
+                  ),
+                  const SizedBox(width: 12),
+                  ElevatedButton(
                     onPressed: _showRequestDialog,
-                    child: const Text('요청'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.pink.shade200,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 12,
+                      ),
+                    ),
+                    child: const Text('요청카드'),
                   ),
                 ],
               ),

@@ -1,5 +1,7 @@
+// request_card 모델
+
 import 'package:flutter/material.dart';
-import '../../../services/request_service.dart';
+import '../service/request_service.dart';
 
 class RequestDialog extends StatefulWidget {
   const RequestDialog({Key? key}) : super(key: key);

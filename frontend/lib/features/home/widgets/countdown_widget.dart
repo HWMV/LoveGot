@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../widgets/custom_card.dart';
+import '../../../shared/widgets/custom_card.dart';
 
 class CountdownWidget extends StatelessWidget {
   final int daysRemaining;
