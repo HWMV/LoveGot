@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../core/theme/app_decorations.dart';
 
 class CustomCard extends StatelessWidget {
   final Widget child;
@@ -17,8 +16,16 @@ class CustomCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: padding,
-      decoration: AppDecorations.cardDecoration.copyWith(
+      decoration: BoxDecoration(
         color: backgroundColor ?? Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
       ),
       child: child,
     );

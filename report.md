@@ -1,24 +1,47 @@
 # LoveGot 프로젝트 구현 보고서
 
 ## 1. 프로젝트 구조
-```
-LoveGot/
-├── frontend/                    # Flutter 프론트엔드
-│   ├── lib/
-│   │   ├── core/               # 핵심 유틸리티
-│   │   │   ├── theme/         # 테마 관련 설정
-│   │   │   └── config/        # 환경 설정
-│   │   ├── features/          # 기능별 모듈
-│   │   │   └── home/         # 홈 화면 관련 기능
-│   │   ├── services/         # API 서비스
-│   │   └── widgets/          # 공통 위젯
-│   └── pubspec.yaml           # 의존성 설정
-│
-└── backend/                    # Python 백엔드
-    ├── agent/                 # AI 에이전트
-    ├── data/                  # 데이터 관리
-    └── utils/                 # 유틸리티
-
+## Project Structure
+```frontend/lib/
+├── core/                          # 핵심 설정 및 유틸리티
+│   ├── config/                    # 환경 설정
+│   │   └── env.dart
+│   ├── constants/                 # 상수 정의
+│   └── theme/                     # 테마 설정
+├── features/                      # 기능별 모듈
+│   ├── compliment_card/          # 칭찬 카드 기능
+│   │   ├── ui/                   # 화면 구성요소
+│   │   │   └── compliment_screen.dart
+│   │   ├── model/               # 데이터 모델
+│   │   │   └── compliment_model.dart
+│   │   ├── service/             # API 통신
+│   │   │   └── compliment_service.dart
+│   │   └── widget/              # UI 컴포넌트
+│   │       └── compliment_dialog.dart
+│   ├── request_card/            # 요청 카드 기능
+│   │   ├── ui/
+│   │   │   └── request_modal.dart
+│   │   ├── model/
+│   │   │   └── request_model.dart
+│   │   └── service/
+│   │       └── request_service.dart
+│   └── home/                    # 홈 화면
+│       ├── screens/
+│       │   └── home_screen.dart
+│       └── widgets/             # 홈 화면 위젯들
+│           ├── affection_level_widget.dart
+│           ├── anniversary_widget.dart
+│           ├── countdown_widget.dart
+│           ├── home_app_bar.dart
+│           └── pet_widget.dart
+├── shared/                      # 공통 컴포넌트
+│   ├── widgets/                 # 공통 위젯
+│   │   ├── bottom_nav_bar.dart
+│   │   ├── custom_card.dart
+│   │   └── primary_button.dart
+│   ├── services/                # 공통 서비스
+│   └── utils/                   # 유틸리티 함수
+└── main.dart                    # 앱 진입점
 ```
 
 ## 2. 구현된 기능
@@ -42,6 +65,11 @@ LoveGot/
   - 사용자 입력 텍스트 처리
   - AI 개선 제안 3가지 제공
   - 개선된 표현 선택 기능
+
+- **칭찬 카드 기능**
+  - 칭찬 메시지 작성 및 전송
+  - 팝업 다이얼로그 형태
+  - 사용자 입력 텍스트 처리
 
 #### Services
 - **API 통신**
@@ -106,3 +134,66 @@ LoveGot/
 3. 오프라인 지원
 4. 푸시 알림 구현
 5. 데이터 백업 시스템 
+
+# README.md 수정사항 보고서
+
+## 변경 개요
+- README.md 파일을 더 체계적이고 상세한 개발 가이드로 업데이트
+- 프로젝트 구조 및 설정 방법 상세화
+- 환경별 설정 가이드 추가
+- 문제 해결 섹션 추가
+
+## 주요 변경사항
+
+### 1. 프로젝트 구조 설명 개선
+- 기존: 단순 디렉토리 구조 나열
+- 변경: 각 디렉토리의 역할과 목적을 명확히 설명
+- 프론트엔드/백엔드 구조를 시각적으로 개선
+
+### 2. 개발 환경 설정 가이드 상세화
+#### 프론트엔드 설정
+- Flutter SDK 설치 확인 단계 추가
+- 환경별 설정 방법 상세화
+  - 개발 환경: localhost:8000
+  - 프로덕션 환경: dart-define 옵션 사용법
+
+#### 백엔드 설정
+- Python 가상환경 설정 단계 상세화
+- 환경 변수 설정 방법 추가
+- 서버 실행 명령어 환경별로 구분
+
+### 3. 주요 기능 섹션 추가
+- 모듈식 프로젝트 구조
+- 애니메이션 효과가 있는 요청 다이얼로그
+- 환경별 설정 관리
+- 보안 설정 (CORS, 환경 변수)
+
+### 4. 개발 가이드 섹션 추가
+- 프론트엔드 개발 구조 설명
+  - features/: 기능별 모듈
+  - core/: 공통 설정 및 유틸리티
+  - services/: API 통신 서비스
+  - widgets/: 재사용 가능한 위젯
+- 백엔드 개발 구조 설명
+  - main.py: FastAPI 애플리케이션 진입점
+  - agent/: AI 에이전트 관련 코드
+  - 환경 변수 관리 방법
+
+### 5. 배포 가이드 추가
+- 프론트엔드 배포 방법
+- 백엔드 배포 상태 및 환경 변수 관리 방법
+
+### 6. 문제 해결 섹션 추가
+- CORS 오류 해결 방법
+- API 연결 오류 해결 방법
+- 환경별 문제 해결 가이드
+
+## 기존 내용 유지
+- 협업 시 규칙 섹션은 그대로 유지
+- Git 작업 관련 가이드라인 유지
+
+## 개선 효과
+1. 새로운 팀원의 온보딩 용이성 향상
+2. 환경별 설정 명확화로 개발 효율성 향상
+3. 문제 해결 가이드로 디버깅 시간 단축
+4. 프로젝트 구조 이해도 향상 
