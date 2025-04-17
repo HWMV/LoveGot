@@ -2,8 +2,9 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class RequestService {
-  static const String baseUrl = 'http://localhost:8000'; // 로컬 URL
-  // static const String baseUrl =
+  // static const String baseUrl = 'http://localhost:8000'; // 로컬 URL
+  static const String baseUrl =
+      'https://lovegot-844249836889.us-central1.run.app';
   //     ''; // 실제 백엔드 URL
 
   static Future<Map<String, dynamic>> getAISuggestions(String userInput) async {

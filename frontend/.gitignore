@@ -41,7 +41,6 @@ lib/core/config/env.prod.dart    # Production environment file (contains sensiti
 lib/core/config/env.dev.dart     # Development environment file
 
 # Web related
-lib/generated_plugin_registrant.dart
 
 # Symbolication related
 app.*.symbols

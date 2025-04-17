@@ -57,6 +57,29 @@ LoveGot/
 4. Install dependencies: `pip install -r requirements.txt`
 5. Run the backend: `python main.py`
 
+## DATA Schema
+3. **데이터 스키마**
+3-1. 회원가입 & 로그인
+  ```
+  users 컬렉션
+      {
+      "id": "string",
+      "email": "string",
+      "password": "string (hashed)",
+      "nickname": "string",
+      "couple_id": "string (nullable)"
+    }
+  ```
+  ```
+  couples 컬렉션
+    {
+      "id": "string",
+      "user1_id": "string",
+      "user2_id": "string",
+      "created_at": "timestamp"
+    }
+  ```
+
 ## 협업 시 규칙
 <협업 시 규칙>
 

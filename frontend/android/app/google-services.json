@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "629758088814",
+    "project_id": "lovegot-d8943",
+    "storage_bucket": "lovegot-d8943.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:629758088814:android:8208ff707c13b7203eb87f",
+        "android_client_info": {
+          "package_name": "com.example.frontend"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIVjIOjgy6Mrzaqg-L_UHbTPxCKsmA-XA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

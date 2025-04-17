@@ -6,6 +6,10 @@ import uvicorn
 from typing import Dict
 from fastapi.middleware.cors import CORSMiddleware
 
+# 로그인, 회원가입
+from typing import Optional
+import uuid
+
 # agent.py와 agentconfig.py는 이미 존재한다고 가정
 from agent.agent import GottmanAgent
 
@@ -21,6 +25,18 @@ app.add_middleware(
 )
 
 # 사용자 요청 형식
+# 회원가입 & 로그인 모달 정의
+class UserCreate(BaseModel):
+    email: str
+    password: str
+    nickname: str
+
+class UserResponse(BaseModel):
+    id: str
+    email: str
+    nickname: str
+    couple_id: Optional[str] = None
+
 # (2) 요청 바디 정의
 class RequestBody(BaseModel):
     user_input: str

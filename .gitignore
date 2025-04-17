@@ -4,6 +4,9 @@ venv/
 # docker file 제외
 backend/dockerfile
 
+# firebase credential.json SECRET_KEY
+/lovegot-d8943-firebase-adminsdk-fbsvc-9fad212f78.json
+
 # Flutter (frontend gitignore integration)
 
 # 이미지 관련
