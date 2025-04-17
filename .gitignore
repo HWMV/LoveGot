@@ -5,7 +5,8 @@ venv/
 backend/dockerfile
 
 # firebase credential.json SECRET_KEY
-backend/lovegot-d8943-firebase-adminsdk-fbsvc-9fad212f78.json
+# backend/lovegot-d8943-firebase-adminsdk-fbsvc-9fad212f78.json
+backend/service_account.json
 
 # Flutter (frontend gitignore integration)
 

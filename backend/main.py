@@ -13,11 +13,16 @@ from datetime import datetime, timedelta
 from agent.agent import GottmanAgent
 agent = GottmanAgent()
 
+import openai
+openai.api_key = os.getenv("OPENAI_API_KEY")
 # ───────────────────────────────── Firebase init ───────────────────────────────
 # Cloud Run(또는 로컬)에서 GOOGLE_APPLICATION_CREDENTIALS 환경변수에
 # service‑account json 경로를 지정해 두면 한 줄로 초기화됩니다.
-cred = credentials.Certificate(os.getenv("GOOGLE_APPLICATION_CREDENTIALS"))
+
+cred_path = "/backend/service_account.json"
+cred = credentials.Certificate(cred_path)
 firebase_admin.initialize_app(cred)
+
 db = firestore.client()
 
 users_ref   = db.collection("users")
