@@ -2,7 +2,7 @@
 import os
 from openai import OpenAI
 from .agentconfig import AgentConfig
-client = OpenAI(api_key=AgentConfig.OPENAI_API_KEY)
+# client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 from typing import Tuple
 import json
 from .prompts import SYSTEM_PROMPT, REQUEST_PROMPT_TEMPLATE
@@ -16,6 +16,7 @@ class GottmanAgent:
         """
         user_input을 받아 GPT를 통해 긍정적 화법 3문장을 생성 후 (Answer1, Answer2, Answer3)를 리턴
         """
+        client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
         messages = [
             {
