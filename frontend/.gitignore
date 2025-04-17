@@ -39,6 +39,7 @@ migrate_working_dir/
 .env.*
 lib/core/config/env.prod.dart    # Production environment file (contains sensitive information)
 lib/core/config/env.dev.dart     # Development environment file
+lib/firebase_options.dart
 
 # Web related
 
