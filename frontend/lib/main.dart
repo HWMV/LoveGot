@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'features/home/screens/home_screen.dart';
+import 'features/auth/ui/login_screen.dart';
+import 'features/auth/ui/signup_screen.dart';
 
 void main() {
   runApp(const LoveGot());
@@ -32,7 +33,11 @@ class LoveGot extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const HomeScreen(),
+      initialRoute: '/login',
+      routes: {
+        '/login': (context) => const LoginScreen(),
+        '/signup': (context) => const SignUpScreen(),
+      },
     );
   }
 }
