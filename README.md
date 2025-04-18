@@ -19,26 +19,47 @@ backend/
 ```
 
 
-```
-LoveGot/
-├── frontend/                    # Flutter frontend application
-│   ├── lib/                     # Main Flutter source code
-│   │   ├── feature/            # Feature-based architecture
-│   │   │   └── home/           # Home feature
-│   │   │       └── home_screen.dart
-│   │   └── main.dart           # Application entry point
-│   ├── pubspec.yaml            # Flutter dependencies
-│   └── README.md               # Frontend specific documentation
-│
-├── backend/                     # Python backend application
-│   ├── agent/                   # AI agent related code
-│   ├── data/                    # Data related code
-│   ├── utils/                   # Utility functions
-│   ├── main.py                 # Backend entry point
-│   ├── requirements.txt        # Python dependencies
-│   └── .env                    # Environment variables
-│
-└── README.md                   # Project documentation
+### Frontend Structure
+```frontend/lib/
+├── core/                          # 핵심 설정 및 유틸리티
+│   ├── config/                    # 환경 설정
+│   │   └── env.dart
+│   ├── constants/                 # 상수 정의
+│   └── theme/                     # 테마 설정
+├── features/                      # 기능별 모듈
+│   ├── compliment_card/          # 칭찬 카드 기능
+│   │   ├── ui/                   # 화면 구성요소
+│   │   │   └── compliment_screen.dart
+│   │   ├── model/               # 데이터 모델
+│   │   │   └── compliment_model.dart
+│   │   ├── service/             # API 통신
+│   │   │   └── compliment_service.dart
+│   │   └── widget/              # UI 컴포넌트
+│   │       └── compliment_dialog.dart
+│   ├── request_card/            # 요청 카드 기능
+│   │   ├── ui/
+│   │   │   └── request_modal.dart
+│   │   ├── model/
+│   │   │   └── request_model.dart
+│   │   └── service/
+│   │       └── request_service.dart
+│   └── home/                    # 홈 화면
+│       ├── screens/
+│       │   └── home_screen.dart
+│       └── widgets/             # 홈 화면 위젯들
+│           ├── affection_level_widget.dart
+│           ├── anniversary_widget.dart
+│           ├── countdown_widget.dart
+│           ├── home_app_bar.dart
+│           └── pet_widget.dart
+├── shared/                      # 공통 컴포넌트
+│   ├── widgets/                 # 공통 위젯
+│   │   ├── bottom_nav_bar.dart
+│   │   ├── custom_card.dart
+│   │   └── primary_button.dart
+│   ├── services/                # 공통 서비스
+│   └── utils/                   # 유틸리티 함수
+└── main.dart                    # 앱 진입점
 ```
 
 ## Getting Started
