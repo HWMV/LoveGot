@@ -20,7 +20,7 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 # service‑account json 경로를 지정해 두면 한 줄로 초기화됩니다.
 
 # cred_path = "/backend/service_account.json"
-cred_path = "/backend/service_account.json"
+cred_path = "./service_account.json"
 
 cred = credentials.Certificate(cred_path)
 firebase_admin.initialize_app(cred)
