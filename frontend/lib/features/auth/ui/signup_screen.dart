@@ -10,14 +10,14 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  final _nameController = TextEditingController();
+  final _nicknameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _authService = AuthService();
   bool _isLoading = false;
 
   Future<void> _signUp() async {
-    if (_nameController.text.isEmpty ||
+    if (_nicknameController.text.isEmpty ||
         _emailController.text.isEmpty ||
         _passwordController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -30,17 +30,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
     try {
       await _authService.signUp(
-        _nameController.text,
+        _nicknameController.text,
         _emailController.text,
         _passwordController.text,
       );
-      Navigator.pop(context); // 로그인 화면으로 돌아가기
+      if (mounted) {
+        Navigator.pop(context);
+      }
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(e.toString())),
-      );
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(e.toString())),
+        );
+      }
     } finally {
-      setState(() => _isLoading = false);
+      if (mounted) {
+        setState(() => _isLoading = false);
+      }
     }
   }
 
@@ -55,9 +61,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextField(
-                controller: _nameController,
+                controller: _nicknameController,
                 decoration: const InputDecoration(
-                  labelText: '이름',
+                  labelText: '닉네임',
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -68,6 +74,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   labelText: '이메일',
                   border: OutlineInputBorder(),
                 ),
+                keyboardType: TextInputType.emailAddress,
               ),
               const SizedBox(height: 16),
               TextField(

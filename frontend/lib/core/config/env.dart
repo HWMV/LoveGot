@@ -6,23 +6,32 @@
 * 
 * 사용 방법:
 * - 개발 시: 기본값으로 개발 환경 사용
-* - 배포 시: --dart-define=DEV_MODE=false 옵션으로 빌드
+* - 배포 시: --dart-define=ENV=prod 옵션으로 빌드
 */
 
 import 'env.dev.dart';
 import 'env.prod.dart';
 
 class Env {
-  static const bool isDevelopment = bool.fromEnvironment(
-    'DEV_MODE',
-    defaultValue: true,
+  static const String environment = String.fromEnvironment(
+    'ENV',
+    defaultValue: 'dev',
   );
 
   static String get apiUrl {
-    if (isDevelopment) {
-      return EnvDev.apiUrl;
-    } else {
-      return EnvProd.apiUrl;
+    switch (environment) {
+      case 'prod':
+        return EnvProd.apiUrl;
+      case 'dev':
+      default:
+        return EnvDev.apiUrl;
     }
   }
+
+  static bool get isDevelopment => environment != 'prod';
+
+  static const String apiBaseUrl = String.fromEnvironment(
+    'API_BASE_URL',
+    defaultValue: 'http://10.0.2.2:8080', // Android 에뮬레이터용
+  );
 }
