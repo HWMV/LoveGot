@@ -7,6 +7,7 @@ import '../widgets/couple_avatar_widget.dart';
 import '../../../shared/widgets/bottom_nav_bar.dart';
 import '../../request_card/ui/request_modal.dart';
 import '../widgets/compliment_dialog.dart';
+import '../../balance_game/screens/balance_game_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -121,6 +122,25 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     child: const Text('요청카드'),
+                  ),
+                  const SizedBox(width: 12),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const BalanceGameScreen(),
+                        ),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.pink.shade200,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 12,
+                      ),
+                    ),
+                    child: const Text('밸런스 게임'),
                   ),
                 ],
               ),
