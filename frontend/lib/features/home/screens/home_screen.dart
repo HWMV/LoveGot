@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import '../widgets/home_app_bar.dart';
 import '../widgets/anniversary_widget.dart';
-import '../widgets/pet_widget.dart';
 import '../widgets/affection_level_widget.dart';
 import '../widgets/countdown_widget.dart';
+import '../widgets/couple_avatar_widget.dart';
 import '../../../shared/widgets/bottom_nav_bar.dart';
 import '../../request_card/ui/request_modal.dart';
 import '../widgets/compliment_dialog.dart';
@@ -78,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         partnerNickname: partnerNickname,
                       ),
                       const SizedBox(height: 20),
-                      const PetWidget(),
+                      const CoupleAvatarWidget(),
                       const SizedBox(height: 20),
                       AffectionLevelWidget(
                         affectionLevel: affectionLevel,
