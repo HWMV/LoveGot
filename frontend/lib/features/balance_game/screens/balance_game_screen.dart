@@ -11,14 +11,126 @@ class _BalanceGameScreenState extends State<BalanceGameScreen> {
   bool _showResult = false;
   int _selectedOption = 0;
   int _partnerOption = 1;
-  double _option1Percentage = 0.7;
-  double _option2Percentage = 0.3;
+  double _option1Percentage = 76.2;
+  double _option2Percentage = 23.8;
 
   void _onOptionSelected(int option) {
     setState(() {
       _selectedOption = option;
-      _showResult = true;
     });
+  }
+
+  Widget _buildResultView() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Expanded(
+              flex: (_option1Percentage * 10).round(),
+              child: Container(
+                height: 40,
+                decoration: const BoxDecoration(
+                  color: Color(0xFFFFE0EB),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    bottomLeft: Radius.circular(20),
+                  ),
+                ),
+                alignment: Alignment.center,
+                child: Text(
+                  '1번 ${_option1Percentage.toStringAsFixed(1)}%',
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontFamily: 'Pretendard',
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              flex: (_option2Percentage * 10).round(),
+              child: Container(
+                height: 40,
+                decoration: const BoxDecoration(
+                  color: Color(0xFFF3F3F3),
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(20),
+                    bottomRight: Radius.circular(20),
+                  ),
+                ),
+                alignment: Alignment.center,
+                child: Text(
+                  '2번 ${_option2Percentage.toStringAsFixed(1)}%',
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontFamily: 'Pretendard',
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 16),
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: const Color(0xFFFFE0EB),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Text(
+            '연인의 선택 답변 : ${_partnerOption}번',
+            style: const TextStyle(
+              fontSize: 16,
+              fontFamily: 'Pretendard',
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+        const SizedBox(height: 12),
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: const Color(0xFFFFE0EB),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Text(
+            '당신의 선택 답변 : ${_selectedOption}번',
+            style: const TextStyle(
+              fontSize: 16,
+              fontFamily: 'Pretendard',
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+        const SizedBox(height: 24),
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.pink[100]!),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Row(
+            children: [
+              const Text(
+                '밸런스의 생각을 적어주세요!',
+                style: TextStyle(
+                  fontSize: 14,
+                  fontFamily: 'Pretendard',
+                  color: Colors.grey,
+                ),
+              ),
+              const Spacer(),
+              Icon(Icons.send, color: Colors.pink[100]),
+            ],
+          ),
+        ),
+      ],
+    );
   }
 
   @override
@@ -64,73 +176,77 @@ class _BalanceGameScreenState extends State<BalanceGameScreen> {
                 ),
               ),
               const SizedBox(height: 24),
-              _buildOptionButton(
-                text: '1번 : 9시에 업무 시작이다',
-                option: 1,
-              ),
-              const SizedBox(height: 12),
-              _buildOptionButton(
-                text: '2번 : 9시까지 출근해도 된다!',
-                option: 2,
-              ),
-              const SizedBox(height: 24),
-              const Text(
-                '700명이 참여했어요',
-                style: TextStyle(
-                  fontSize: 14,
-                  fontFamily: 'Epilogue',
-                  fontWeight: FontWeight.w500,
+              if (!_showResult) ...[
+                _buildOptionButton(
+                  text: '1번 : 9시에 업무 시작이다',
+                  option: 1,
                 ),
-              ),
-              const Spacer(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.favorite_border),
-                    onPressed: () {},
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.chat_bubble_outline),
-                    onPressed: () {},
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.share),
-                    onPressed: () {},
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
-              Center(
-                child: ElevatedButton(
-                  onPressed: _selectedOption != 0
-                      ? () {
-                          setState(() {
-                            _showResult = true;
-                          });
-                        }
-                      : null,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.pink[100],
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 32,
-                      vertical: 16,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  child: const Text(
-                    '선택 완료',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontFamily: 'Pretendard',
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black87,
-                    ),
+                const SizedBox(height: 12),
+                _buildOptionButton(
+                  text: '2번 : 9시까지 출근해도 된다!',
+                  option: 2,
+                ),
+                const SizedBox(height: 24),
+                const Text(
+                  '700명이 참여했어요',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontFamily: 'Epilogue',
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
-              ),
+                const Spacer(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.favorite_border),
+                      onPressed: () {},
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.chat_bubble_outline),
+                      onPressed: () {},
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.share),
+                      onPressed: () {},
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                Center(
+                  child: ElevatedButton(
+                    onPressed: _selectedOption != 0
+                        ? () {
+                            setState(() {
+                              _showResult = true;
+                            });
+                          }
+                        : null,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.pink[100],
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 32,
+                        vertical: 16,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: const Text(
+                      '선택 완료',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontFamily: 'Pretendard',
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black87,
+                      ),
+                    ),
+                  ),
+                ),
+              ] else ...[
+                _buildResultView(),
+              ],
               const SizedBox(height: 16),
             ],
           ),
