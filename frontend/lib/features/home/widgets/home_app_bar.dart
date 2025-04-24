@@ -24,10 +24,11 @@ class HomeAppBar extends StatelessWidget {
             constraints: const BoxConstraints(),
           ),
           const Text(
-            'LoveGott',
+            'LoveGot',
             style: TextStyle(
               fontSize: 24,
               color: Colors.black,
+              fontFamily: 'Pretendard',
             ),
           ),
           IconButton(

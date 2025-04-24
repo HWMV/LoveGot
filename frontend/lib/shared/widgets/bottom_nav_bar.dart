@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../features/positive_talk/screens/positive_talk_screen.dart';
 
 class BottomNavBar extends StatelessWidget {
   final int selectedIndex;
@@ -29,20 +30,33 @@ class BottomNavBar extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            _buildNavItem(0, Icons.favorite, 'Home'),
-            _buildNavItem(1, Icons.chat_bubble_outline, 'Chat'),
-            _buildNavItem(2, Icons.calendar_today, 'Calendar'),
-            _buildNavItem(3, Icons.person_outline, 'Profile'),
+            _buildNavItem(0, Icons.home, 'Home', context),
+            _buildNavItem(1, Icons.chat_bubble_outline, 'Community', context),
+            _buildNavItem(2, Icons.calendar_today, 'Coaching', context),
+            _buildNavItem(3, Icons.person_outline, 'Profile', context),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildNavItem(int index, IconData icon, String label) {
+  Widget _buildNavItem(
+      int index, IconData icon, String label, BuildContext context) {
     final bool isSelected = index == selectedIndex;
     return InkWell(
-      onTap: () => onItemSelected(index),
+      onTap: () {
+        if (index == 2) {
+          // Coaching 버튼
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const PositiveTalkScreen(),
+            ),
+          );
+        } else {
+          onItemSelected(index);
+        }
+      },
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
