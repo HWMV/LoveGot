@@ -5,7 +5,7 @@ import '../widgets/affection_level_widget.dart';
 import '../widgets/countdown_widget.dart';
 import '../widgets/couple_avatar_widget.dart';
 import '../../../shared/widgets/bottom_nav_bar.dart';
-import '../../request_card/ui/request_modal.dart';
+import '../../request_card/screens/request_modal.dart';
 import '../widgets/compliment_dialog.dart';
 import '../../balance_game/screens/balance_game_screen.dart';
 
