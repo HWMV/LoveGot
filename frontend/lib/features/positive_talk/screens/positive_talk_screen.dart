@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'situation_selection_screen.dart';
 
 class PositiveTalkScreen extends StatefulWidget {
   const PositiveTalkScreen({Key? key}) : super(key: key);
@@ -32,15 +33,11 @@ class _PositiveTalkScreenState extends State<PositiveTalkScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset(
-                    'assets/images/positive_talk_images/avatar_toothpaste_angry.png',
-                    height: 200,
-                  ),
-                  const SizedBox(height: 40),
                   const Text(
                     '훈련을 시작해볼까요?',
+                    textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 30,
                       fontFamily: 'Pretendard',
                       fontWeight: FontWeight.bold,
                       color: Color(0xFF333333),
@@ -59,9 +56,10 @@ class _PositiveTalkScreenState extends State<PositiveTalkScreen> {
                   const SizedBox(height: 40),
                   ElevatedButton(
                     onPressed: () {
-                      setState(() {
-                        _showTraining = true;
-                      });
+                      showDialog(
+                        context: context,
+                        builder: (context) => const SituationSelectionScreen(),
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFFFF8FA3),
