@@ -1,17 +1,47 @@
 import 'package:flutter/material.dart';
-import 'training_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import '../models/scenario_model.dart';
+import '../screens/training_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SituationSelectionScreen extends StatelessWidget {
   const SituationSelectionScreen({Key? key}) : super(key: key);
 
+  Future<List<Scenario>> _fetchScenarios() async {
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+
+      if (user == null) {
+        print('❌ 유저가 인증되지 않았습니다. Firestore에 접근할 수 없습니다.');
+        return [];
+      }
+
+      final snapshot =
+          await FirebaseFirestore.instance.collection('scenarios').get();
+
+      if (snapshot.docs.isEmpty) {
+        print('⚠️ No scenarios found in Firestore');
+        return [];
+      }
+
+      return snapshot.docs.map((doc) {
+        final data = doc.data();
+        return Scenario.fromMap(data);
+      }).toList();
+    } catch (e) {
+      print('❌ Firebase fetch error: $e');
+      print('❌ Error details: ${e.toString()}');
+      return [];
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Container(
         padding: const EdgeInsets.all(24),
+        height: 500,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -19,31 +49,33 @@ class SituationSelectionScreen extends StatelessWidget {
               '훈련할 대화 상황을 선택해주세요',
               style: TextStyle(
                 fontSize: 20,
-                fontFamily: 'Pretendard',
                 fontWeight: FontWeight.bold,
-                color: Color(0xFF333333),
               ),
             ),
-            const SizedBox(height: 24),
-            _buildSituationCard(
-              context,
-              '연인이 회식으로 늦게 귀가 했을 때',
-              '회식으로 인한 지각 상황',
-              Icons.nightlife,
-            ),
             const SizedBox(height: 16),
-            _buildSituationCard(
-              context,
-              '연락을 잘 받지 않았을 때',
-              '연락이 닿지 않는 상황',
-              Icons.phone_missed,
-            ),
-            const SizedBox(height: 16),
-            _buildSituationCard(
-              context,
-              '연인이 치약을 가운데부터 짰을 때',
-              '일상적인 불편 상황',
-              Icons.cleaning_services,
+            Expanded(
+              child: FutureBuilder<List<Scenario>>(
+                future: _fetchScenarios(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  if (snapshot.hasError) {
+                    print('❌ Firebase fetch error: ${snapshot.error}');
+                    return Center(child: Text('에러 발생: ${snapshot.error}'));
+                  }
+
+                  final scenarios = snapshot.data ?? [];
+
+                  return ListView.builder(
+                    itemCount: scenarios.length,
+                    itemBuilder: (context, index) {
+                      final scenario = scenarios[index];
+                      return _buildScenarioCard(context, scenario);
+                    },
+                  );
+                },
+              ),
             ),
           ],
         ),
@@ -51,74 +83,40 @@ class SituationSelectionScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSituationCard(
-    BuildContext context,
-    String title,
-    String subtitle,
-    IconData icon,
-  ) {
-    return Card(
-      elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: InkWell(
-        onTap: () {
-          Navigator.pop(context); // 현재 다이얼로그 닫기
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => TrainingScreen(situation: title),
-            ),
-          );
-        },
+  Widget _buildScenarioCard(BuildContext context, Scenario scenario) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.pop(context); // 다이얼로그 닫기
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => TrainingScreen(scenario: scenario),
+          ),
+        );
+      },
+      child: Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        margin: const EdgeInsets.symmetric(vertical: 8),
+        elevation: 2,
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Row(
             children: [
-              Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFFFF5F7),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Icon(
-                  icon,
-                  color: const Color(0xFFFF8FA3),
-                  size: 24,
-                ),
-              ),
-              const SizedBox(width: 16),
+              const Icon(Icons.chat_bubble_outline, color: Colors.pink),
+              const SizedBox(width: 12),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      title,
+                      scenario.id + '. ' + scenario.prompt,
                       style: const TextStyle(
-                        fontSize: 16,
-                        fontFamily: 'Pretendard',
-                        fontWeight: FontWeight.w600,
-                        color: Color(0xFF333333),
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      subtitle,
-                      style: const TextStyle(
-                        fontSize: 14,
-                        fontFamily: 'Pretendard',
-                        color: Color(0xFF666666),
-                      ),
+                          fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
               ),
-              const Icon(
-                Icons.arrow_forward_ios,
-                color: Color(0xFFCCCCCC),
-                size: 16,
-              ),
+              const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey),
             ],
           ),
         ),

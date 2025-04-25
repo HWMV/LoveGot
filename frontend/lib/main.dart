@@ -4,12 +4,17 @@ import 'firebase_options.dart';
 import 'features/auth/screens/login_screen.dart';
 import 'features/auth/screens/signup_screen.dart';
 import 'features/home/screens/home_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  final user = FirebaseAuth.instance.currentUser;
+  print('🔥 초기 로그인 유저: ${user?.uid}');
+
   runApp(const LoveGot());
 }
 
