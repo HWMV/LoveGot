@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import '../../../../core/config/env.dart';
+import '../../../core/config/env.dart';
 
 class RequestService {
   static Future<Map<String, dynamic>> getAISuggestions(String userInput) async {

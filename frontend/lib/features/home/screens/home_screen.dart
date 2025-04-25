@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import '../widgets/home_app_bar.dart';
 import '../widgets/anniversary_widget.dart';
-import '../widgets/pet_widget.dart';
 import '../widgets/affection_level_widget.dart';
 import '../widgets/countdown_widget.dart';
+import '../widgets/couple_avatar_widget.dart';
 import '../../../shared/widgets/bottom_nav_bar.dart';
-import '../../request_card/ui/request_modal.dart';
+import '../../request_card/screens/request_modal.dart';
 import '../widgets/compliment_dialog.dart';
+import '../../balance_game/screens/balance_game_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -78,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         partnerNickname: partnerNickname,
                       ),
                       const SizedBox(height: 20),
-                      const PetWidget(),
+                      const CoupleAvatarWidget(),
                       const SizedBox(height: 20),
                       AffectionLevelWidget(
                         affectionLevel: affectionLevel,
@@ -121,6 +122,25 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     child: const Text('요청카드'),
+                  ),
+                  const SizedBox(width: 12),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const BalanceGameScreen(),
+                        ),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.pink.shade200,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 12,
+                      ),
+                    ),
+                    child: const Text('밸런스 게임'),
                   ),
                 ],
               ),
