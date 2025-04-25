@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../features/positive_talk/screens/positive_talk_screen.dart';
+import '../../features/community/screens/community_screen.dart';
 
 class BottomNavBar extends StatelessWidget {
   final int selectedIndex;
@@ -51,6 +52,14 @@ class BottomNavBar extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) => const PositiveTalkScreen(),
+            ),
+          );
+        } else if (index == 1) {
+          // Community 버튼
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const CommunityScreen(),
             ),
           );
         } else {
