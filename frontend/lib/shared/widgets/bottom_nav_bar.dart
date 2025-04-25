@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../features/positive_talk/screens/positive_talk_screen.dart';
 import '../../features/community/screens/community_screen.dart';
+import '../../features/home/screens/home_screen.dart';
 
 class BottomNavBar extends StatelessWidget {
   final int selectedIndex;
@@ -60,6 +61,14 @@ class BottomNavBar extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) => const CommunityScreen(),
+            ),
+          );
+        } else if (index == 0) {
+          // Home 버튼
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const HomeScreen(),
             ),
           );
         } else {
