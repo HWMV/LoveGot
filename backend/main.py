@@ -20,8 +20,7 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 # service‑account json 경로를 지정해 두면 한 줄로 초기화됩니다.
 
 # cred_path = "/backend/service_account.json"
-cred_path = "./service_account.json"
-
+cred_path = "service_account.json"
 cred = credentials.Certificate(cred_path)
 firebase_admin.initialize_app(cred)
 
@@ -189,6 +188,52 @@ async def request_couple(
     })
     batch.commit()
     return {"couple_id": couple_id, "message": "Couple linked 🎉"}
+
+# 긍정훈련법 시뮬레이션 기능
+@app.get("/scenario/{scenario_id}")
+def get_scenario(scenario_id: str):
+    doc = db.collection("scenarios").document(scenario_id).get()
+    if not doc.exists:
+        raise HTTPException(status_code=404, detail="Scenario not found")
+
+    data = doc.to_dict()
+    return {
+        "scenario_id": scenario_id,
+        "prompt": data["prompt"],
+        "choices": data["choices"],
+    }
+
+# 긍정훈련법 시뮬레이션-사용자 선택 처리 및 결과 반환 API
+class ScenarioAnswerRequest(BaseModel):
+    scenario_id: str
+    selected_index: int
+
+@app.post("/scenario/answer")
+def submit_answer(req: ScenarioAnswerRequest):
+    doc = db.collection("scenarios").document(req.scenario_id).get()
+    if not doc.exists:
+        raise HTTPException(status_code=404, detail="Scenario not found")
+
+    scenario = doc.to_dict()
+    correct = (req.selected_index == scenario["correct_index"])
+    score = 10 if correct else 0
+
+    if correct:
+        result_message = scenario.get("result_positive", "좋은 선택이에요!")
+    else:
+        result_negative = scenario.get("result_negative", [])
+        # 인덱스 확인 후 메시지 선택
+        if isinstance(result_negative, list) and req.selected_index < len(result_negative):
+            result_message = result_negative[req.selected_index]
+        else:
+            result_message = "조금 더 신중한 대화가 필요해 보여요."
+
+    return {
+        "is_correct": correct,
+        "score": score,
+        "result_message": result_message
+    }
+
 
 # ────────────────────────────────── main ───────────────────────────────────────
 if __name__ == "__main__":
