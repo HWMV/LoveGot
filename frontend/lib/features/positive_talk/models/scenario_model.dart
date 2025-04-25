@@ -17,13 +17,23 @@ class Scenario {
 
   factory Scenario.fromMap(Map<String, dynamic> map) {
     return Scenario(
-      id: map['id'] ?? '',
-      prompt: map['prompt'] ?? '',
-      choices: List<String>.from(map['choices'] ?? []),
-      correctIndex: map['correct_index'] ?? 0,
-      resultPositive: map['result_positive'] ?? '',
-      resultNegative: List<String>.from(map['result_negative'] ?? []),
-      //avatarUrl: '', // 아직 사용 안 하니 빈 문자열 처리
+      id: map['id'] as String,
+      prompt: map['prompt'] as String,
+      choices: List<String>.from(map['choices'] as List),
+      correctIndex: map['correct_index'] as int,
+      resultPositive: map['result_positive'] as String,
+      resultNegative: List<String>.from(map['result_negative'] as List),
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'prompt': prompt,
+      'choices': choices,
+      'correct_index': correctIndex,
+      'result_positive': resultPositive,
+      'result_negative': resultNegative,
+    };
   }
 }
