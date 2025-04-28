@@ -1,123 +1,133 @@
 import 'package:flutter/material.dart';
-import 'training_screen.dart';
+import '../models/scenario_model.dart';
+import '../screens/training_screen.dart';
+import '../services/scenario_service.dart';
 
 class SituationSelectionScreen extends StatelessWidget {
   const SituationSelectionScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Dialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
+    return Scaffold(
+      backgroundColor: const Color(0xFFFFF5F7),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios, color: Color(0xFF333333)),
+          onPressed: () => Navigator.pop(context),
+        ),
+        title: const Text(
+          '훈련할 대화 상황을 선택해 주세요',
+          style: TextStyle(
+            color: Color(0xFF333333),
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
-      child: Container(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Text(
-              '훈련할 대화 상황을 선택해주세요',
-              style: TextStyle(
-                fontSize: 20,
-                fontFamily: 'Pretendard',
-                fontWeight: FontWeight.bold,
-                color: Color(0xFF333333),
+      body: SafeArea(
+        child: Center(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _buildSituationCard(
+                    context,
+                    title: '연인이 치약을 가운데부터 짰을 때',
+                    subtitle: '일상적인 불편 상황',
+                    color: const Color(0xFFFFD1DC),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              const TrainingScreen(scenarioId: '001'),
+                        ),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 14),
+                  _buildSituationCard(
+                    context,
+                    title: '연인이 약속시간에 늦었을 때',
+                    subtitle: '매번 데이트마다 늦는 상황',
+                    color: const Color(0xFFB5EAD7),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              const TrainingScreen(scenarioId: '002'),
+                        ),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 14),
+                  _buildSituationCard(
+                    context,
+                    title: '연인이 회식으로 늦게 귀가 했을 때',
+                    subtitle: '회식으로 인한 지각 상황',
+                    color: const Color(0xFFC7CEEA),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              const TrainingScreen(scenarioId: '003'),
+                        ),
+                      );
+                    },
+                  ),
+                ],
               ),
             ),
-            const SizedBox(height: 24),
-            _buildSituationCard(
-              context,
-              '연인이 회식으로 늦게 귀가 했을 때',
-              '회식으로 인한 지각 상황',
-              Icons.nightlife,
-            ),
-            const SizedBox(height: 16),
-            _buildSituationCard(
-              context,
-              '연락을 잘 받지 않았을 때',
-              '연락이 닿지 않는 상황',
-              Icons.phone_missed,
-            ),
-            const SizedBox(height: 16),
-            _buildSituationCard(
-              context,
-              '연인이 치약을 가운데부터 짰을 때',
-              '일상적인 불편 상황',
-              Icons.cleaning_services,
-            ),
-          ],
+          ),
         ),
       ),
     );
   }
 
   Widget _buildSituationCard(
-    BuildContext context,
-    String title,
-    String subtitle,
-    IconData icon,
-  ) {
+    BuildContext context, {
+    required String title,
+    required String subtitle,
+    required Color color,
+    required VoidCallback onTap,
+  }) {
     return Card(
-      elevation: 2,
+      elevation: 4,
+      color: color,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(20),
       ),
       child: InkWell(
-        onTap: () {
-          Navigator.pop(context); // 현재 다이얼로그 닫기
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => TrainingScreen(situation: title),
-            ),
-          );
-        },
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(20),
         child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Row(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFFFF5F7),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Icon(
-                  icon,
-                  color: const Color(0xFFFF8FA3),
-                  size: 24,
+              Text(
+                title,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF333333),
                 ),
               ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontFamily: 'Pretendard',
-                        fontWeight: FontWeight.w600,
-                        color: Color(0xFF333333),
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      subtitle,
-                      style: const TextStyle(
-                        fontSize: 14,
-                        fontFamily: 'Pretendard',
-                        color: Color(0xFF666666),
-                      ),
-                    ),
-                  ],
+              const SizedBox(height: 8),
+              Text(
+                subtitle,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 14,
+                  color: Color(0xFF666666),
                 ),
-              ),
-              const Icon(
-                Icons.arrow_forward_ios,
-                color: Color(0xFFCCCCCC),
-                size: 16,
               ),
             ],
           ),

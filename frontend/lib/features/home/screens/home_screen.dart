@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/home_app_bar.dart';
 import '../widgets/anniversary_widget.dart';
-import '../widgets/affection_level_widget.dart';
 import '../widgets/countdown_widget.dart';
 import '../widgets/couple_avatar_widget.dart';
 import '../../../shared/widgets/bottom_nav_bar.dart';
@@ -18,11 +17,10 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   // Sample data (would be fetched from backend in a real app)
-  final DateTime anniversaryDate = DateTime(2024, 1, 1);
+  final DateTime anniversaryDate = DateTime(2025, 1, 1);
   final String myNickname = "나";
   final String partnerNickname = "연인";
-  final int affectionLevel = 76;
-  final DateTime nextSpecialDay = DateTime(2024, 7, 20);
+  final DateTime nextSpecialDay = DateTime(2025, 1, 1);
   final String specialDayName = "기념일";
   int _selectedIndex = 0;
 
@@ -67,80 +65,88 @@ class _HomeScreenState extends State<HomeScreen> {
               onMessageTap: _showRequestDialog,
             ),
             Expanded(
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Column(
-                    children: [
-                      const SizedBox(height: 16),
-                      AnniversaryWidget(
-                        days: daysSinceAnniversary,
-                        myNickname: myNickname,
-                        partnerNickname: partnerNickname,
-                      ),
-                      const SizedBox(height: 20),
-                      const CoupleAvatarWidget(),
-                      const SizedBox(height: 20),
-                      AffectionLevelWidget(
-                        affectionLevel: affectionLevel,
-                      ),
-                      const SizedBox(height: 20),
-                      CountdownWidget(
-                        daysRemaining: daysUntilSpecialDay,
-                        specialDayName: specialDayName,
-                      ),
-                      const SizedBox(height: 20),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              child: Column(
                 children: [
-                  ElevatedButton(
-                    onPressed: _showComplimentDialog,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.pink.shade200,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 12,
-                      ),
-                    ),
-                    child: const Text('칭찬카드'),
-                  ),
-                  const SizedBox(width: 12),
-                  ElevatedButton(
-                    onPressed: _showRequestDialog,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.pink.shade200,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 12,
-                      ),
-                    ),
-                    child: const Text('요청카드'),
-                  ),
-                  const SizedBox(width: 12),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const BalanceGameScreen(),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 14),
+                        AnniversaryWidget(
+                          days: daysSinceAnniversary,
+                          myNickname: myNickname,
+                          partnerNickname: partnerNickname,
                         ),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.pink.shade200,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 12,
-                      ),
+                        const SizedBox(height: 8),
+                      ],
                     ),
-                    child: const Text('밸런스 게임'),
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: const CoupleAvatarWidget(),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Column(
+                      children: [
+                        CountdownWidget(
+                          daysRemaining: daysUntilSpecialDay,
+                          specialDayName: specialDayName,
+                        ),
+                        const SizedBox(height: 16),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ElevatedButton(
+                              onPressed: _showComplimentDialog,
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.pink.shade200,
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                  vertical: 12,
+                                ),
+                              ),
+                              child: const Text('칭찬카드'),
+                            ),
+                            const SizedBox(width: 12),
+                            ElevatedButton(
+                              onPressed: _showRequestDialog,
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.pink.shade200,
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                  vertical: 12,
+                                ),
+                              ),
+                              child: const Text('요청카드'),
+                            ),
+                            const SizedBox(width: 12),
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const BalanceGameScreen(),
+                                  ),
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.pink.shade200,
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                  vertical: 12,
+                                ),
+                              ),
+                              child: const Text('밸런스 게임'),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 16),
+                      ],
+                    ),
                   ),
                 ],
               ),
