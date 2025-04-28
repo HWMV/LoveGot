@@ -42,9 +42,9 @@ class _TrainingScreenState extends State<TrainingScreen> {
 
   String _getResultAvatar(String scenarioId, int selectedIndex) {
     if (selectedIndex == 0) {
-      return 'images/scenario_002.png';
+      return 'assets/images/scenario_002.png';
     } else if (selectedIndex == 1) {
-      return 'images/scenario_001.png';
+      return 'assets/images/scenario_001.png';
     } else {
       return 'images/scenario_001.png';
     }
