@@ -42,11 +42,11 @@ class _TrainingScreenState extends State<TrainingScreen> {
 
   String _getResultAvatar(String scenarioId, int selectedIndex) {
     if (selectedIndex == 0) {
-      return 'assets/images/scenario_002.png';
+      return 'images/scenario_002.png';
     } else if (selectedIndex == 1) {
-      return 'assets/images/scenario_001.png';
+      return 'images/scenario_001.png';
     } else {
-      return 'assets/images/scenario_001.png';
+      return 'images/scenario_001.png';
     }
   }
 
@@ -104,17 +104,69 @@ class _TrainingScreenState extends State<TrainingScreen> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        // Result Avatar
+                        // Situation Description (prompt)
+                        Center(
+                          child: ConstrainedBox(
+                            constraints: const BoxConstraints(maxWidth: 320),
+                            child: Container(
+                              padding: const EdgeInsets.all(14),
+                              decoration: BoxDecoration(
+                                color: scenarioColor,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Text(
+                                scenario.prompt,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400,
+                                  color: Color(0xFF333333),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        // Selected Choice (above avatar)
                         Container(
-                          padding: const EdgeInsets.all(16),
+                          padding: const EdgeInsets.all(24),
                           decoration: BoxDecoration(
-                            color: scenarioColor,
+                            color: scenarioColor.withOpacity(0.8),
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(
+                                color: const Color(0xFFCCCCCC), width: 2),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.08),
+                                blurRadius: 10,
+                                offset: const Offset(0, 4),
+                              ),
+                            ],
+                          ),
+                          child: Text(
+                            scenario.choices[_selectedIndex!],
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                              color: Color(0xFF333333),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        // Avatar Image (smaller height)
+                        Container(
+                          height: MediaQuery.of(context).size.height * 0.5,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 24, vertical: 14),
+                          decoration: BoxDecoration(
+                            color: scenarioColor.withOpacity(0.3),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Image.asset(
                             _getResultAvatar(
                                 widget.scenarioId, _selectedIndex!),
-                            height: 180,
+                            height: MediaQuery.of(context).size.height * 0.25,
                             errorBuilder: (context, error, stackTrace) {
                               return const Icon(
                                 Icons.image_not_supported,
@@ -125,29 +177,11 @@ class _TrainingScreenState extends State<TrainingScreen> {
                           ),
                         ),
                         const SizedBox(height: 20),
-                        // Selected Choice
-                        Container(
-                          padding: const EdgeInsets.all(20),
-                          decoration: BoxDecoration(
-                            color: scenarioColor,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Text(
-                            scenario.choices[_selectedIndex!],
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF333333),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 20),
                         // Response
                         Container(
                           padding: const EdgeInsets.all(20),
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: scenarioColor.withOpacity(0.3),
                             borderRadius: BorderRadius.circular(20),
                             border: Border.all(color: const Color(0xFFEEEEEE)),
                           ),
@@ -160,7 +194,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 32),
+                        const SizedBox(height: 20),
                         // Next Button
                         ElevatedButton(
                           onPressed: () {
@@ -171,11 +205,12 @@ class _TrainingScreenState extends State<TrainingScreen> {
                             backgroundColor: scenarioColor,
                             padding: const EdgeInsets.symmetric(
                               horizontal: 40,
-                              vertical: 16,
+                              vertical: 18,
                             ),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20),
                             ),
+                            elevation: 0,
                           ),
                           child: const Text(
                             '다음 연습하기',
@@ -197,18 +232,43 @@ class _TrainingScreenState extends State<TrainingScreen> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
+                      // Situation Description (moved above avatar)
+                      Center(
+                        child: ConstrainedBox(
+                          constraints: const BoxConstraints(maxWidth: 320),
+                          child: Container(
+                            padding: const EdgeInsets.all(14),
+                            decoration: BoxDecoration(
+                              color: scenarioColor,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Text(
+                              scenario.prompt,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFF333333),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 24),
                       // Avatar Image
                       Container(
-                        padding: const EdgeInsets.all(16),
+                        height: MediaQuery.of(context).size.height * 0.5,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 24, vertical: 20),
                         decoration: BoxDecoration(
-                          color: scenarioColor,
+                          color: scenarioColor.withOpacity(0.3),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Image.asset(
-                          'assets/images/scenario_${widget.scenarioId}.png',
-                          height: 180,
+                          'images/scenario_${widget.scenarioId}.png',
+                          height: MediaQuery.of(context).size.height * 0.25,
                           errorBuilder: (context, error, stackTrace) {
                             return const Icon(
                               Icons.image_not_supported,
@@ -218,32 +278,14 @@ class _TrainingScreenState extends State<TrainingScreen> {
                           },
                         ),
                       ),
-                      const SizedBox(height: 20),
-                      // Situation Description
-                      Container(
-                        padding: const EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                          color: scenarioColor,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Text(
-                          scenario.prompt,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFF333333),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 10),
                       // Question
                       const Text(
                         '긍정적 대화법을 위해 어떻게 말하면 좋을까요?',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 10,
-                          color: Color(0xFF666666),
+                          fontSize: 12,
+                          color: Color(0xFF999999),
                         ),
                       ),
                       const SizedBox(height: 20),
@@ -251,32 +293,40 @@ class _TrainingScreenState extends State<TrainingScreen> {
                       ...List.generate(
                         scenario.choices.length,
                         (index) => Padding(
-                          padding: const EdgeInsets.only(bottom: 12.0),
-                          child: ElevatedButton(
-                            onPressed: () {
-                              setState(() {
-                                _selectedIndex = index;
-                                _showResult = true;
-                              });
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white,
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 20,
-                                vertical: 16,
-                              ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
-                                side:
-                                    const BorderSide(color: Color(0xFFEEEEEE)),
-                              ),
-                            ),
-                            child: Text(
-                              scenario.choices[index],
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                fontSize: 14,
-                                color: Color(0xFF333333),
+                          padding: const EdgeInsets.only(bottom: 16.0),
+                          child: Center(
+                            child: ConstrainedBox(
+                              constraints: const BoxConstraints(maxWidth: 350),
+                              child: SizedBox(
+                                width: double.infinity,
+                                height: 30,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      _selectedIndex = index;
+                                      _showResult = true;
+                                    });
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.white,
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                      side: const BorderSide(
+                                          color: Color(0xFFEEEEEE)),
+                                    ),
+                                    elevation: 0,
+                                  ),
+                                  child: Text(
+                                    scenario.choices[index],
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      color: Color(0xFF333333),
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
                           ),
