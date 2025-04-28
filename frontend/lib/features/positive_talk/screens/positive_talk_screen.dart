@@ -57,12 +57,7 @@ class PositiveTalkScreen extends StatelessWidget {
                 const SizedBox(height: 40),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const SituationSelectionScreen(),
-                      ),
-                    );
+                    showSituationSelectionDialog(context);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.pink.shade200,
