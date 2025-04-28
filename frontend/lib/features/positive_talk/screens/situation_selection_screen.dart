@@ -38,7 +38,6 @@ class SituationSelectionScreen extends StatelessWidget {
                     context,
                     title: '연인이 치약을 가운데부터 짰을 때',
                     subtitle: '일상적인 불편 상황',
-                    color: const Color(0xFFFFD1DC),
                     onTap: () {
                       Navigator.push(
                         context,
@@ -54,7 +53,6 @@ class SituationSelectionScreen extends StatelessWidget {
                     context,
                     title: '연인이 약속시간에 늦었을 때',
                     subtitle: '매번 데이트마다 늦는 상황',
-                    color: const Color(0xFFB5EAD7),
                     onTap: () {
                       Navigator.push(
                         context,
@@ -70,7 +68,6 @@ class SituationSelectionScreen extends StatelessWidget {
                     context,
                     title: '연인이 회식으로 늦게 귀가 했을 때',
                     subtitle: '회식으로 인한 지각 상황',
-                    color: const Color(0xFFC7CEEA),
                     onTap: () {
                       Navigator.push(
                         context,
@@ -94,42 +91,64 @@ class SituationSelectionScreen extends StatelessWidget {
     BuildContext context, {
     required String title,
     required String subtitle,
-    required Color color,
     required VoidCallback onTap,
   }) {
-    return Card(
-      elevation: 4,
-      color: color,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(20),
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                title,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF333333),
+    return SizedBox(
+      width: double.infinity,
+      child: Card(
+        elevation: 4,
+        color: Colors.transparent,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(20),
+          child: Container(
+            height: 120,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              image: DecorationImage(
+                image: const AssetImage('assets/images/dialog_bg.png'),
+                fit: BoxFit.cover,
+                colorFilter: ColorFilter.mode(
+                  Colors.white.withOpacity(0.3),
+                  BlendMode.dstATop,
                 ),
               ),
-              const SizedBox(height: 8),
-              Text(
-                subtitle,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 14,
-                  color: Color(0xFF666666),
+            ),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: const Color(0xFFFFD1DC).withOpacity(0.3),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      title,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF333333),
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      subtitle,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        color: Color(0xFF666666),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ],
+            ),
           ),
         ),
       ),

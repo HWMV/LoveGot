@@ -42,11 +42,11 @@ class _TrainingScreenState extends State<TrainingScreen> {
 
   String _getResultAvatar(String scenarioId, int selectedIndex) {
     if (selectedIndex == 0) {
-      return 'assets/images/avatar_happy.png';
+      return 'assets/images/avatar_tooth_smile.png';
     } else if (selectedIndex == 1) {
-      return 'assets/images/avatar_angry.png';
+      return 'assets/images/avatar_tooth_angry.png';
     } else {
-      return 'assets/images/avatar_sad.png';
+      return 'assets/images/avatar_tooth_angry.png';
     }
   }
 
@@ -212,8 +212,9 @@ class _TrainingScreenState extends State<TrainingScreen> {
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Image.asset(
-                          'assets/images/scenario_${widget.scenarioId}.png',
-                          height: 180,
+                          'assets/images/avatar_tooth_smile.png',
+                          width: double.infinity,
+                          fit: BoxFit.contain,
                           errorBuilder: (context, error, stackTrace) {
                             return const Icon(
                               Icons.image_not_supported,
