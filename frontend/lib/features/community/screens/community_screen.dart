@@ -65,7 +65,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  '⏰ 저녁에 출근 vs 아침에 출근',
+                  '⏰ 아침형 인간 vs 저녁형 인간',
                   style: TextStyle(
                     fontSize: 18,
                     fontFamily: 'Pretendard',
@@ -127,6 +127,168 @@ class _CommunityScreenState extends State<CommunityScreen> {
               ],
             ),
           ),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.1),
+                  spreadRadius: 1,
+                  blurRadius: 6,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  '🌅 아침 9시까지 출근 vs 9시에 업무 시작',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontFamily: 'Pretendard',
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF333333),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Container(
+                  height: 40,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: const Color(0xFFF5F5F5),
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 45,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: const BorderRadius.horizontal(
+                                left: Radius.circular(20)),
+                            color: Colors.green.shade300,
+                          ),
+                          alignment: Alignment.center,
+                          child: const Text(
+                            '45%',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 55,
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: const Text(
+                            '55%',
+                            style: TextStyle(
+                              color: Colors.orange,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 8),
+                const Text(
+                  '응답자: 512명',
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Color(0xFF666666),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.1),
+                  spreadRadius: 1,
+                  blurRadius: 6,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  '🍽️ 밥 먹고 바로 설거지하기 vs 조금 쉬었다가 집안일 몰아서 하기',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontFamily: 'Pretendard',
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF333333),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Container(
+                  height: 40,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: const Color(0xFFF5F5F5),
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 60,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: const BorderRadius.horizontal(
+                                left: Radius.circular(20)),
+                            color: Colors.purple.shade300,
+                          ),
+                          alignment: Alignment.center,
+                          child: const Text(
+                            '60%',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 40,
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: const Text(
+                            '40%',
+                            style: TextStyle(
+                              color: Colors.teal,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 8),
+                const Text(
+                  '응답자: 634명',
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Color(0xFF666666),
+                  ),
+                ),
+              ],
+            ),
+          ),
 
           // 댓글 섹션
           Expanded(
@@ -141,16 +303,6 @@ class _CommunityScreenState extends State<CommunityScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    '댓글창',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontFamily: 'Pretendard',
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF333333),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
                   Expanded(
                     child: ListView.builder(
                       itemCount: 0, // TODO: Implement actual comments
@@ -172,6 +324,13 @@ class _CommunityScreenState extends State<CommunityScreen> {
             _selectedIndex = index;
           });
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: const Color(0xFFFFC1D6), // pastel pink
+        onPressed: () {
+          // TODO: Implement post creation navigation
+        },
+        child: const Icon(Icons.add, color: Colors.white),
       ),
     );
   }
