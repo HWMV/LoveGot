@@ -89,47 +89,81 @@ Widget _buildSituationCard(
   required Color color,
   required VoidCallback onTap,
 }) {
-  return SizedBox(
-    width: double.infinity,
-    height: 140,
-    child: Card(
-      elevation: 6,
-      color: color,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-        side: BorderSide(color: Colors.white, width: 2),
-      ),
-      shadowColor: Colors.black12,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(20),
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                title,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xFF333333),
-                ),
+  return StatefulBuilder(
+    builder: (context, setState) {
+      bool isSelected = false;
+
+      return SizedBox(
+        width: double.infinity,
+        height: 140,
+        child: Card(
+          elevation: isSelected ? 8 : 6,
+          color: color,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+            side: BorderSide(
+              color: isSelected ? Colors.pink.shade300 : Colors.white,
+              width: isSelected ? 3 : 2,
+            ),
+          ),
+          shadowColor: isSelected ? Colors.pink.shade100 : Colors.black12,
+          child: InkWell(
+            onTap: () {
+              setState(() {
+                isSelected = true;
+              });
+              Future.delayed(const Duration(milliseconds: 200), () {
+                onTap();
+              });
+            },
+            borderRadius: BorderRadius.circular(20),
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    title,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                      color: const Color(0xFF333333),
+                      shadows: isSelected
+                          ? [
+                              Shadow(
+                                color: Colors.pink.shade200,
+                                blurRadius: 10,
+                                offset: const Offset(0, 2),
+                              ),
+                            ]
+                          : null,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    subtitle,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: const Color(0xFF666666),
+                      shadows: isSelected
+                          ? [
+                              Shadow(
+                                color: Colors.pink.shade200,
+                                blurRadius: 8,
+                                offset: const Offset(0, 1),
+                              ),
+                            ]
+                          : null,
+                    ),
+                  ),
+                ],
               ),
-              const SizedBox(height: 10),
-              Text(
-                subtitle,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 15,
-                  color: Color(0xFF666666),
-                ),
-              ),
-            ],
+            ),
           ),
         ),
-      ),
-    ),
+      );
+    },
   );
 }
