@@ -20,6 +20,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
   final ScenarioService _scenarioService = ScenarioService();
   int? _selectedIndex;
   bool _showResult = false;
+  int? _pressedIndex;
 
   @override
   void initState() {
@@ -46,7 +47,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
     } else if (selectedIndex == 1) {
       return 'assets/images/scenario_001.png';
     } else {
-      return 'assets/images/avatar_sad.png';
+      return 'assets/images/scenario_001.png';
     }
   }
 
@@ -97,101 +98,114 @@ class _TrainingScreenState extends State<TrainingScreen> {
             final scenarioColor = _getScenarioColor(widget.scenarioId);
 
             if (_showResult) {
-              return Center(
-                child: SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        // Result Avatar
-                        Container(
-                          padding: const EdgeInsets.all(16),
-                          decoration: BoxDecoration(
-                            color: scenarioColor,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Image.asset(
-                            _getResultAvatar(
-                                widget.scenarioId, _selectedIndex!),
-                            height: 180,
-                            errorBuilder: (context, error, stackTrace) {
-                              return const Icon(
-                                Icons.image_not_supported,
-                                size: 80,
-                                color: Colors.grey,
-                              );
-                            },
-                          ),
+              // Use SizedBox to constrain height and remove vertical padding, so avatar aligns flush to top
+              return SizedBox(
+                height: MediaQuery.of(context).size.height,
+                width: double.infinity,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Column(
+                    // Remove mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      // Avatar and response box (overlapping)
+                      Container(
+                        height: MediaQuery.of(context).size.height * 0.75,
+                        margin: EdgeInsets.zero,
+                        padding: EdgeInsets.zero,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: scenarioColor.withOpacity(0.3),
+                          borderRadius: BorderRadius.circular(20),
                         ),
-                        const SizedBox(height: 20),
-                        // Selected Choice
-                        Container(
-                          padding: const EdgeInsets.all(20),
-                          decoration: BoxDecoration(
-                            color: scenarioColor,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Text(
-                            scenario.choices[_selectedIndex!],
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF333333),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        // Response
-                        Container(
-                          padding: const EdgeInsets.all(20),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(20),
-                            border: Border.all(color: const Color(0xFFEEEEEE)),
-                          ),
-                          child: Text(
-                            _getResponse(scenario, _selectedIndex!),
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontSize: 16,
-                              color: Color(0xFF333333),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 32),
-                        // Next Button
-                        ElevatedButton(
-                          onPressed: () {
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const SituationSelectionScreen(),
+                        child: Stack(
+                          alignment: Alignment.bottomCenter,
+                          children: [
+                            // Avatar image centered vertically and horizontally
+                            Center(
+                              child: Image.asset(
+                                _getResultAvatar(
+                                    widget.scenarioId, _selectedIndex!),
+                                width: MediaQuery.of(context).size.width * 0.65,
+                                fit: BoxFit.contain,
+                                errorBuilder: (context, error, stackTrace) {
+                                  return const Icon(
+                                    Icons.image_not_supported,
+                                    size: 80,
+                                    color: Colors.grey,
+                                  );
+                                },
                               ),
-                            );
+                            ),
+                            // Response box, overlapping with avatar (moved up)
+                            Positioned(
+                              bottom: 150,
+                              left: MediaQuery.of(context).size.width * 0.05,
+                              right: MediaQuery.of(context).size.width * 0.05,
+                              child: Container(
+                                // Overlap more with the avatar image by using higher bottom offset
+                                margin: const EdgeInsets.only(bottom: 0),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 24,
+                                  vertical: 16,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withOpacity(0.85),
+                                  borderRadius: BorderRadius.circular(30),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.1),
+                                      blurRadius: 10,
+                                      offset: const Offset(0, 4),
+                                    ),
+                                  ],
+                                ),
+                                child: Text(
+                                  _getResponse(scenario, _selectedIndex!),
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xFF333333),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 24),
+                      // Next Button, always visible within the viewport
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                            showSituationSelectionDialog(context);
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: scenarioColor,
+                            backgroundColor: scenarioColor.withOpacity(0.95),
                             padding: const EdgeInsets.symmetric(
                               horizontal: 40,
-                              vertical: 16,
+                              vertical: 20,
                             ),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20),
                             ),
+                            elevation: 4,
+                            shadowColor: Colors.black45,
                           ),
                           child: const Text(
                             '다음 연습하기',
                             style: TextStyle(
-                              fontSize: 16,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
                               color: Colors.white,
                             ),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               );
@@ -202,18 +216,41 @@ class _TrainingScreenState extends State<TrainingScreen> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      // Avatar Image
+                      // Situation Description (moved above avatar)
                       Container(
-                        padding: const EdgeInsets.all(16),
+                        width: double.infinity,
+                        // Remove margin, use only internal horizontal padding
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 14),
                         decoration: BoxDecoration(
                           color: scenarioColor,
                           borderRadius: BorderRadius.circular(20),
                         ),
+                        child: Text.rich(
+                          TextSpan(text: scenario.prompt),
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF333333),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 24),
+                      // Avatar Image
+                      Container(
+                        height: MediaQuery.of(context).size.height * 0.5,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 24, vertical: 20),
+                        decoration: BoxDecoration(
+                          color: scenarioColor.withOpacity(0.3),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
                         child: Image.asset(
-                          'assets/images/scenario_${widget.scenarioId}.png',
-                          height: 180,
+                          'images/scenario_${widget.scenarioId}.png',
+                          height: MediaQuery.of(context).size.height * 0.25,
                           errorBuilder: (context, error, stackTrace) {
                             return const Icon(
                               Icons.image_not_supported,
@@ -223,32 +260,14 @@ class _TrainingScreenState extends State<TrainingScreen> {
                           },
                         ),
                       ),
-                      const SizedBox(height: 20),
-                      // Situation Description
-                      Container(
-                        padding: const EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                          color: scenarioColor,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Text(
-                          scenario.prompt,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFF333333),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 10),
                       // Question
                       const Text(
                         '긍정적 대화법을 위해 어떻게 말하면 좋을까요?',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 10,
-                          color: Color(0xFF666666),
+                          fontSize: 12,
+                          color: Color(0xFF999999),
                         ),
                       ),
                       const SizedBox(height: 20),
@@ -256,32 +275,77 @@ class _TrainingScreenState extends State<TrainingScreen> {
                       ...List.generate(
                         scenario.choices.length,
                         (index) => Padding(
-                          padding: const EdgeInsets.only(bottom: 12.0),
-                          child: ElevatedButton(
-                            onPressed: () {
-                              setState(() {
-                                _selectedIndex = index;
-                                _showResult = true;
-                              });
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white,
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 20,
-                                vertical: 16,
-                              ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
-                                side:
-                                    const BorderSide(color: Color(0xFFEEEEEE)),
-                              ),
-                            ),
-                            child: Text(
-                              scenario.choices[index],
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                fontSize: 14,
-                                color: Color(0xFF333333),
+                          padding: const EdgeInsets.only(bottom: 16.0),
+                          child: Center(
+                            child: ConstrainedBox(
+                              constraints: const BoxConstraints(maxWidth: 350),
+                              child: GestureDetector(
+                                onTapDown: (_) {
+                                  setState(() {
+                                    _pressedIndex = index;
+                                  });
+                                },
+                                onTapUp: (_) {
+                                  setState(() {
+                                    _pressedIndex = null;
+                                  });
+                                },
+                                onTapCancel: () {
+                                  setState(() {
+                                    _pressedIndex = null;
+                                  });
+                                },
+                                onTap: () {
+                                  setState(() {
+                                    _selectedIndex = index;
+                                    _showResult = true;
+                                  });
+                                },
+                                child: AnimatedScale(
+                                  scale: _pressedIndex == index ? 0.95 : 1.0,
+                                  duration: const Duration(milliseconds: 100),
+                                  curve: Curves.easeInOut,
+                                  child: AnimatedContainer(
+                                    duration: const Duration(milliseconds: 200),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      border: Border.all(
+                                        color: _selectedIndex == index
+                                            ? const Color(
+                                                0xFFB39397) // Darker border when selected
+                                            : const Color(
+                                                0xFFDDC6C9), // Subtle border when unselected
+                                        width: 1.5,
+                                      ),
+                                      color: Colors.white,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.05),
+                                          blurRadius: 4,
+                                          offset: Offset(0, 2),
+                                        ),
+                                      ],
+                                    ),
+                                    child: SizedBox(
+                                      width: double.infinity,
+                                      height: 36,
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 16),
+                                        child: Center(
+                                          child: Text(
+                                            scenario.choices[index],
+                                            textAlign: TextAlign.center,
+                                            style: const TextStyle(
+                                              fontSize: 16,
+                                              color: Color(0xFF333333),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
                           ),
