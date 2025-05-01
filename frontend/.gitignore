@@ -57,7 +57,10 @@ app.*.map.json
 .venv/
 
 # 이미지 관련
+<<<<<<< HEAD
 /frontend/assets/
+=======
+>>>>>>> 1c1ef1c (edit training_screen uxui design)
 *.png
 !frontend/assets/images/*.png
 *.jpg
@@ -68,3 +71,7 @@ app.*.map.json
 !frontend/assets/images/*.gif
 *.svg
 !frontend/assets/images/*.svg
+<<<<<<< HEAD
+=======
+/frontend/assets/images/
+>>>>>>> 1c1ef1c (edit training_screen uxui design)
