@@ -47,7 +47,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
     } else if (selectedIndex == 1) {
       return 'assets/images/scenario_001.png';
     } else {
-      return 'assets/images/scenario_001.png';
+      return 'assets/images/scenario_000.png';
     }
   }
 
