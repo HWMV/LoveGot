@@ -46,7 +46,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
     } else if (selectedIndex == 1) {
       return 'assets/images/scenario_001.png';
     } else {
-      return 'images/scenario_001.png';
+      return 'images/scenario_000.png';
     }
   }
 
@@ -308,7 +308,8 @@ class _TrainingScreenState extends State<TrainingScreen> {
                                     });
                                   },
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.white,
+                                    backgroundColor: const Color.fromARGB(
+                                        255, 244, 143, 177),
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 10),
                                     shape: RoundedRectangleBorder(
