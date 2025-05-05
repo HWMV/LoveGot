@@ -41,7 +41,7 @@ class _BalanceGameScreenState extends State<BalanceGameScreen> {
               child: Container(
                 height: 40,
                 decoration: const BoxDecoration(
-                  color: Color(0xFFFFE0EB),
+                  color: Color(0xFFD6D6D6),
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20),
                     bottomLeft: Radius.circular(20),
@@ -63,7 +63,7 @@ class _BalanceGameScreenState extends State<BalanceGameScreen> {
               child: Container(
                 height: 40,
                 decoration: const BoxDecoration(
-                  color: Color(0xFFF3F3F3),
+                  color: Color(0xFFB0B0B0),
                   borderRadius: BorderRadius.only(
                     topRight: Radius.circular(20),
                     bottomRight: Radius.circular(20),
@@ -82,63 +82,57 @@ class _BalanceGameScreenState extends State<BalanceGameScreen> {
             ),
           ],
         ),
-        const SizedBox(height: 16),
+        const SizedBox(height: 20),
         Container(
           width: double.infinity,
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
-            color: const Color(0xFFFFE0EB),
-            borderRadius: BorderRadius.circular(12),
+            color: const Color(0xFFE0F2FF),
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.15),
+                spreadRadius: 1,
+                blurRadius: 6,
+                offset: const Offset(0, 3),
+              ),
+            ],
           ),
           child: Text(
             '연인의 선택 답변 : ${_partnerOption}번',
             style: const TextStyle(
-              fontSize: 16,
+              fontSize: 18,
               fontFamily: 'Pretendard',
               fontWeight: FontWeight.w500,
             ),
           ),
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: 16),
         Container(
           width: double.infinity,
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
             color: const Color(0xFFFFE0EB),
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.15),
+                spreadRadius: 1,
+                blurRadius: 6,
+                offset: const Offset(0, 3),
+              ),
+            ],
           ),
           child: Text(
             '당신의 선택 답변 : ${_selectedOption}번',
             style: const TextStyle(
-              fontSize: 16,
+              fontSize: 18,
               fontFamily: 'Pretendard',
               fontWeight: FontWeight.w500,
             ),
           ),
         ),
         const SizedBox(height: 24),
-        Container(
-          width: double.infinity,
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.pink[100]!),
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Row(
-            children: [
-              const Text(
-                '여러분의 생각을 적어주세요!',
-                style: TextStyle(
-                  fontSize: 14,
-                  fontFamily: 'Pretendard',
-                  color: Colors.grey,
-                ),
-              ),
-              const Spacer(),
-              Icon(Icons.send, color: Colors.pink[100]),
-            ],
-          ),
-        ),
       ],
     );
   }
@@ -168,7 +162,7 @@ class _BalanceGameScreenState extends State<BalanceGameScreen> {
           title: const Text(
             '커뮤니티',
             style: TextStyle(
-              fontSize: 26,
+              fontSize: 20,
               fontFamily: 'Pretendard',
               fontWeight: FontWeight.bold,
             ),
@@ -178,102 +172,148 @@ class _BalanceGameScreenState extends State<BalanceGameScreen> {
         ),
         body: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  '9시 출근의 정의 어떻게 생각하시나요?',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontFamily: 'Pretendard',
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 16),
-                const Text(
-                  '여러분은 어떤 의견이신지 궁금해서 질문 남겨보아요~~!\n직장인분들이라면 공감하실 거라 생각합니다!',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontFamily: 'Pretendard',
-                    fontWeight: FontWeight.normal,
-                  ),
-                ),
-                const SizedBox(height: 24),
-                if (!_showResult) ...[
-                  _buildOptionButton(
-                    text: '1번 : 9시에 업무 시작이다',
-                    option: 1,
-                  ),
-                  const SizedBox(height: 12),
-                  _buildOptionButton(
-                    text: '2번 : 9시까지 출근해도 된다!',
-                    option: 2,
-                  ),
-                  const SizedBox(height: 24),
-                  const Text(
-                    '700명이 참여했어요',
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontFamily: 'Epilogue',
-                      fontWeight: FontWeight.w500,
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 80),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 16, horizontal: 20),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFFFF1E6),
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.15),
+                          spreadRadius: 1,
+                          blurRadius: 8,
+                          offset: const Offset(0, 3),
+                        ),
+                      ],
                     ),
-                  ),
-                  const Spacer(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      IconButton(
-                        icon: const Icon(Icons.favorite_border),
-                        onPressed: () {},
+                    child: const Text(
+                      '9시 출근의 정의 어떻게 생각하시나요?',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontFamily: 'Pretendard',
+                        fontWeight: FontWeight.bold,
                       ),
-                      IconButton(
-                        icon: const Icon(Icons.chat_bubble_outline),
-                        onPressed: () {},
-                      ),
-                      IconButton(
-                        icon: const Icon(Icons.share),
-                        onPressed: () {},
-                      ),
-                    ],
+                    ),
                   ),
                   const SizedBox(height: 16),
-                  Center(
-                    child: ElevatedButton(
-                      onPressed: _selectedOption != 0
-                          ? () {
-                              setState(() {
-                                _showResult = true;
-                              });
-                            }
-                          : null,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.pink[100],
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 32,
-                          vertical: 16,
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
+                  ExpandableStoryBox(
+                    text:
+                        '요즘 이야기를 나눠보면 보다 의견이 나뉘는 경우가 많더라구요.. \n여러분은 어떤 의견이신지 궁금해서 질문 남겨보아요~~!\n직장인분들이라면 공감하실 거라 생각합니다!',
+                  ),
+                  const SizedBox(height: 24),
+                  if (!_showResult) ...[
+                    _buildOptionButton(
+                      text: '1번 : 9시에 업무 시작이다',
+                      option: 1,
+                    ),
+                    const SizedBox(height: 12),
+                    _buildOptionButton(
+                      text: '2번 : 9시까지 출근해도 된다!',
+                      option: 2,
+                    ),
+                    const SizedBox(height: 24),
+                    const Text(
+                      '700명이 참여했어요',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontFamily: 'Epilogue',
+                        fontWeight: FontWeight.w500,
                       ),
-                      child: const Text(
-                        '선택 완료',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontFamily: 'Pretendard',
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black87,
+                    ),
+                    const SizedBox(height: 16),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.favorite_border),
+                          onPressed: () {},
                         ),
+                        IconButton(
+                          icon: const Icon(Icons.chat_bubble_outline),
+                          onPressed: () {},
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.share),
+                          onPressed: () {},
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                  ] else ...[
+                    _buildResultView(),
+                  ],
+                  const SizedBox(height: 16),
+                ],
+              ),
+            ),
+          ),
+        ),
+        bottomNavigationBar: Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.pink[100]!),
+            borderRadius: BorderRadius.circular(12),
+            color: Colors.white,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ElevatedButton(
+                onPressed: _selectedOption != 0 && !_showResult
+                    ? () {
+                        setState(() {
+                          _showResult = true;
+                        });
+                      }
+                    : null,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.pink[100],
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 32,
+                    vertical: 16,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                child: const SizedBox(
+                  width: double.infinity,
+                  child: Center(
+                    child: Text(
+                      '선택 완료',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontFamily: 'Pretendard',
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black87,
                       ),
                     ),
                   ),
-                ] else ...[
-                  _buildResultView(),
+                ),
+              ),
+              const SizedBox(height: 12),
+              Row(
+                children: [
+                  const Expanded(
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: '여러분의 생각을 적어주세요!',
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                  Icon(Icons.send, color: Colors.pink[100]),
                 ],
-                const SizedBox(height: 16),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
@@ -320,6 +360,75 @@ class _BalanceGameScreenState extends State<BalanceGameScreen> {
             color: isSelected ? Colors.pink[900] : Colors.black87,
           ),
         ),
+      ),
+    );
+  }
+}
+
+class ExpandableStoryBox extends StatefulWidget {
+  final String text;
+
+  const ExpandableStoryBox({Key? key, required this.text}) : super(key: key);
+
+  @override
+  State<ExpandableStoryBox> createState() => _ExpandableStoryBoxState();
+}
+
+class _ExpandableStoryBoxState extends State<ExpandableStoryBox>
+    with TickerProviderStateMixin {
+  bool _expanded = false;
+
+  void _toggleExpanded() {
+    setState(() {
+      _expanded = !_expanded;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedSize(
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+      alignment: Alignment.topCenter,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            widget.text,
+            style: const TextStyle(
+              fontSize: 18,
+              fontFamily: 'Pretendard',
+              fontWeight: FontWeight.normal,
+            ),
+            maxLines: _expanded ? null : 2,
+            overflow: TextOverflow.fade,
+          ),
+          const SizedBox(height: 4),
+          GestureDetector(
+            onTap: _toggleExpanded,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  _expanded ? '접기' : '더보기',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontFamily: 'Pretendard',
+                    fontWeight: FontWeight.w500,
+                    color: Colors.pink[300],
+                  ),
+                ),
+                const SizedBox(width: 4),
+                Icon(
+                  _expanded
+                      ? Icons.keyboard_arrow_up
+                      : Icons.keyboard_arrow_down,
+                  color: Colors.pink[300],
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

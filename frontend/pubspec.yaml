@@ -97,7 +97,8 @@ flutter:
     - assets/images/
     - assets/images/dialog_bg.png  # 팝업창 배경 이미지
     - assets/images/wedding_bg1.png    # 웨딩 배경 이미지
-    - assets/images/man_avatar1.png    # 남자 캐릭터
+    - assets/images/man_avatar1.png    # 남자 캐릭터R
     - assets/images/woman_avatar1.png  # 여자 캐릭터
-    - assets/images/avatar_tooth_smile.png
-    - assets/images/avatar_tooth_angry.png
+    - assets/images/scenario_000.png # 긍정대화법 훈련 이미지
+    - assets/images/scenario_001.png # 긍정대화법 훈련 이미지
+    - assets/images/scenario_002.png # 긍정대화법 훈련 이미지
