@@ -9,7 +9,7 @@ void showSituationSelectionDialog(BuildContext context) {
     builder: (BuildContext context) {
       return Dialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        backgroundColor: const Color(0xFFFFF5F7),
+        backgroundColor: Color(0xFFF5EFE6),
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: SingleChildScrollView(
@@ -19,7 +19,7 @@ void showSituationSelectionDialog(BuildContext context) {
                 const Text(
                   '훈련할 대화 상황을 선택해 주세요',
                   style: TextStyle(
-                    color: Color(0xFF333333),
+                    color: Color(0xFF8B7E74),
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
@@ -30,7 +30,7 @@ void showSituationSelectionDialog(BuildContext context) {
                   context,
                   title: '연인이 치약을 가운데부터 짰을 때',
                   subtitle: '일상적인 불편 상황',
-                  color: const Color(0xFFFFE0E6),
+                  color: Color(0xFFE8DCCA),
                   onTap: () {
                     Navigator.pop(context);
                     Navigator.push(
@@ -46,7 +46,7 @@ void showSituationSelectionDialog(BuildContext context) {
                   context,
                   title: '연인이 약속시간에 늦었을 때',
                   subtitle: '매번 데이트마다 늦는 상황',
-                  color: const Color(0xFFFFE0E6),
+                  color: Color(0xFFE8DCCA),
                   onTap: () {
                     Navigator.pop(context);
                     Navigator.push(
@@ -62,7 +62,7 @@ void showSituationSelectionDialog(BuildContext context) {
                   context,
                   title: '연인이 회식으로 늦게 귀가 했을 때',
                   subtitle: '회식으로 인한 지각 상황',
-                  color: const Color(0xFFFFE0E6),
+                  color: Color(0xFFE8DCCA),
                   onTap: () {
                     Navigator.pop(context);
                     Navigator.push(

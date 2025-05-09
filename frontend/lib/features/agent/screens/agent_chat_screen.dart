@@ -12,7 +12,7 @@ class _AgentChatScreenState extends State<AgentChatScreen> {
   static const Color primaryBeigeColor = Color(0xFFF5EFE6); // 밝은 베이지 (배경색)
   static const Color secondaryBeigeColor = Color(0xFFE8DCCA); // 중간 베이지 (섹션 배경)
   static const Color accentBeigeColor = Color(0xFFD4C2A8); // 진한 베이지 (액센트)
-  static const Color brownColor = Color(0xFF8B7E74); // 갈색 (포인트 색상)
+  static const Color brownColor = Color(0xFF8B7E74); // 갈색 (포인트, 텍스트 색상)
   static const Color lightWarmBeigeColor =
       Color(0xFFF7E6D5); // 따뜻한 연한 베이지 (사용자 메시지)
   static const Color lightCoolBeigeColor = Color(0xFFECE8E1); // 차가운 연한 베이지
@@ -27,7 +27,7 @@ class _AgentChatScreenState extends State<AgentChatScreen> {
     messages = [
       _ChatMessage(
         sender: '상황',
-        text: '남자친구가 동창회에서 첫사랑과 뽀뽀를 하는 장면을 내가 목격함.',
+        text: '남자친구가 동창회에서 첫사랑에게 뽀뽀를 받는 모습을 봤어',
         isSituation: true,
       ),
       _ChatMessage(
