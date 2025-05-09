@@ -11,6 +11,7 @@ backend/service_account.json
 # Flutter (frontend gitignore integration)
 
 # 이미지 관련
+/frontend/assets/images/
 *.png
 !frontend/assets/images/*.png
 *.jpg
@@ -21,6 +22,7 @@ backend/service_account.json
 !frontend/assets/images/*.gif
 *.svg
 !frontend/assets/images/*.svg
+/frontend/assets/images/
 
 # macOS system files
 .DS_Store

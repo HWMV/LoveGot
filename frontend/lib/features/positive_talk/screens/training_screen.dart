@@ -249,7 +249,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Image.asset(
-                          'images/scenario_${widget.scenarioId}.png',
+                          'assets/images/scenario_${widget.scenarioId}.png',
                           height: MediaQuery.of(context).size.height * 0.25,
                           errorBuilder: (context, error, stackTrace) {
                             return const Icon(

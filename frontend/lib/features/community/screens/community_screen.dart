@@ -12,15 +12,21 @@ class CommunityScreen extends StatefulWidget {
 class _CommunityScreenState extends State<CommunityScreen> {
   int _selectedIndex = 1; // Community tab index
 
+  // 베이지 계열 색상 정의 (홈 화면과 동일)
+  static const Color primaryBeigeColor = Color(0xFFF5EFE6); // 밝은 베이지 (배경색)
+  static const Color secondaryBeigeColor = Color(0xFFE8DCCA); // 중간 베이지 (섹션 배경)
+  static const Color accentBeigeColor = Color(0xFFD4C2A8); // 진한 베이지 (액센트)
+  static const Color brownColor = Color(0xFF8B7E74); // 갈색 (포인트 색상)
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFFF5F7),
+      backgroundColor: primaryBeigeColor,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: secondaryBeigeColor,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: Color(0xFF333333)),
+          icon: const Icon(Icons.arrow_back_ios, color: brownColor),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -28,7 +34,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
         title: const Text(
           '커뮤니티',
           style: TextStyle(
-            color: Color(0xFF333333),
+            color: brownColor,
             fontSize: 20,
             fontFamily: 'Pretendard',
             fontWeight: FontWeight.bold,
@@ -36,7 +42,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.edit_outlined, color: Color(0xFF333333)),
+            icon: const Icon(Icons.edit_outlined, color: brownColor),
             onPressed: () {
               // TODO: Implement post creation
             },
@@ -50,7 +56,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
             margin: const EdgeInsets.all(16),
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: secondaryBeigeColor,
               borderRadius: BorderRadius.circular(12),
               boxShadow: [
                 BoxShadow(
@@ -70,7 +76,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
                     fontSize: 18,
                     fontFamily: 'Pretendard',
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF333333),
+                    color: brownColor,
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -78,7 +84,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
                   height: 40,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    color: const Color(0xFFF5F5F5),
+                    color: primaryBeigeColor,
                   ),
                   child: Row(
                     children: [
@@ -88,13 +94,13 @@ class _CommunityScreenState extends State<CommunityScreen> {
                           decoration: BoxDecoration(
                             borderRadius: const BorderRadius.horizontal(
                                 left: Radius.circular(20)),
-                            color: Colors.red.shade200,
+                            color: accentBeigeColor,
                           ),
                           alignment: Alignment.center,
                           child: const Text(
                             '30%',
                             style: TextStyle(
-                              color: Colors.white,
+                              color: brownColor,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -107,7 +113,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
                           child: const Text(
                             '70%',
                             style: TextStyle(
-                              color: Colors.blue,
+                              color: brownColor,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -121,7 +127,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
                   '응답자: 709명',
                   style: TextStyle(
                     fontSize: 14,
-                    color: Color(0xFF666666),
+                    color: brownColor,
                   ),
                 ),
               ],
@@ -131,7 +137,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
             margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: secondaryBeigeColor,
               borderRadius: BorderRadius.circular(12),
               boxShadow: [
                 BoxShadow(
@@ -151,7 +157,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
                     fontSize: 18,
                     fontFamily: 'Pretendard',
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF333333),
+                    color: brownColor,
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -159,7 +165,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
                   height: 40,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    color: const Color(0xFFF5F5F5),
+                    color: primaryBeigeColor,
                   ),
                   child: Row(
                     children: [
@@ -169,13 +175,13 @@ class _CommunityScreenState extends State<CommunityScreen> {
                           decoration: BoxDecoration(
                             borderRadius: const BorderRadius.horizontal(
                                 left: Radius.circular(20)),
-                            color: Colors.green.shade300,
+                            color: accentBeigeColor,
                           ),
                           alignment: Alignment.center,
                           child: const Text(
                             '45%',
                             style: TextStyle(
-                              color: Colors.white,
+                              color: brownColor,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -188,7 +194,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
                           child: const Text(
                             '55%',
                             style: TextStyle(
-                              color: Colors.orange,
+                              color: brownColor,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -202,7 +208,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
                   '응답자: 512명',
                   style: TextStyle(
                     fontSize: 14,
-                    color: Color(0xFF666666),
+                    color: brownColor,
                   ),
                 ),
               ],
@@ -212,7 +218,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
             margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: secondaryBeigeColor,
               borderRadius: BorderRadius.circular(12),
               boxShadow: [
                 BoxShadow(
@@ -232,7 +238,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
                     fontSize: 18,
                     fontFamily: 'Pretendard',
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF333333),
+                    color: brownColor,
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -240,7 +246,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
                   height: 40,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    color: const Color(0xFFF5F5F5),
+                    color: primaryBeigeColor,
                   ),
                   child: Row(
                     children: [
@@ -250,13 +256,13 @@ class _CommunityScreenState extends State<CommunityScreen> {
                           decoration: BoxDecoration(
                             borderRadius: const BorderRadius.horizontal(
                                 left: Radius.circular(20)),
-                            color: Colors.purple.shade300,
+                            color: accentBeigeColor,
                           ),
                           alignment: Alignment.center,
                           child: const Text(
                             '60%',
                             style: TextStyle(
-                              color: Colors.white,
+                              color: brownColor,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -269,7 +275,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
                           child: const Text(
                             '40%',
                             style: TextStyle(
-                              color: Colors.teal,
+                              color: brownColor,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -280,13 +286,40 @@ class _CommunityScreenState extends State<CommunityScreen> {
                 ),
                 const SizedBox(height: 8),
                 const Text(
-                  '응답자: 634명',
+                  '응답자: 423명',
                   style: TextStyle(
                     fontSize: 14,
-                    color: Color(0xFF666666),
+                    color: brownColor,
                   ),
                 ),
               ],
+            ),
+          ),
+
+          // 더 많은 투표를 보려면
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: TextButton(
+              onPressed: () {
+                // TODO: 더 많은 투표 화면으로 이동
+              },
+              style: TextButton.styleFrom(
+                foregroundColor: brownColor,
+              ),
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    '더 많은 투표 보기',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(width: 8),
+                  Icon(Icons.arrow_forward_ios, size: 16),
+                ],
+              ),
             ),
           ),
 
@@ -294,9 +327,9 @@ class _CommunityScreenState extends State<CommunityScreen> {
           Expanded(
             child: Container(
               padding: const EdgeInsets.all(16),
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.vertical(
+              decoration: BoxDecoration(
+                color: primaryBeigeColor,
+                borderRadius: const BorderRadius.vertical(
                   top: Radius.circular(20),
                 ),
               ),
@@ -326,11 +359,11 @@ class _CommunityScreenState extends State<CommunityScreen> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: const Color(0xFFFFC1D6), // pastel pink
+        backgroundColor: accentBeigeColor,
         onPressed: () {
           // TODO: Implement post creation navigation
         },
-        child: const Icon(Icons.add, color: Colors.white),
+        child: Icon(Icons.add, color: brownColor),
       ),
     );
   }
