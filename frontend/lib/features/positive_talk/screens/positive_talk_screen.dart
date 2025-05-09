@@ -10,12 +10,12 @@ class PositiveTalkScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFFF5F7),
+      backgroundColor: Color(0xFFF5EFE6),
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Color.fromARGB(255, 232, 220, 202),
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: Color(0xFF333333)),
+          icon: const Icon(Icons.arrow_back_ios, color: Color(0xFFF5EFE6)),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -23,7 +23,7 @@ class PositiveTalkScreen extends StatelessWidget {
         title: const Text(
           '긍정 대화법 연습',
           style: TextStyle(
-            color: Color(0xFF333333),
+            color: Color.fromARGB(255, 139, 126, 116),
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
@@ -60,7 +60,7 @@ class PositiveTalkScreen extends StatelessWidget {
                     showSituationSelectionDialog(context);
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.pink.shade200,
+                    backgroundColor: Color(0xFFE8DCCA),
                     padding: const EdgeInsets.symmetric(
                       horizontal: 48,
                       vertical: 16,
@@ -74,7 +74,7 @@ class PositiveTalkScreen extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
-                      color: Colors.white,
+                      color: Color.fromARGB(255, 139, 126, 116),
                     ),
                   ),
                 ),

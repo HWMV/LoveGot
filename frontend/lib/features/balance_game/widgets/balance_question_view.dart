@@ -14,7 +14,7 @@ class BalanceQuestionView extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
-          '9시 출근의 정의 어떻게 생각하시나요?',
+          '남자 소변 앉아서 싸기 vs 서서 싸기',
           style: TextStyle(
             fontSize: 20,
             fontFamily: 'Pretendard',
@@ -23,7 +23,7 @@ class BalanceQuestionView extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         const Text(
-          '여러분은 어떤 의견이신지 궁금해서 질문 남겨보아요~~!\n직장인분들이라면 공감하실 거라 생각합니다!',
+          '당신의 사연과 서로의 입장을 적어주세요!\n많은 커플들의 생각을 들어보아요!',
           style: TextStyle(
             fontSize: 18,
             fontFamily: 'Pretendard',
@@ -32,12 +32,12 @@ class BalanceQuestionView extends StatelessWidget {
         ),
         const SizedBox(height: 24),
         _buildOptionButton(
-          text: '1번 : 9시에 업무 시작이다',
+          text: '1번 : 앉아서 싸기',
           option: 1,
         ),
         const SizedBox(height: 12),
         _buildOptionButton(
-          text: '2번 : 9시까지 출근해도 된다!',
+          text: '2번 : 서서 싸기',
           option: 2,
         ),
         const SizedBox(height: 24),
