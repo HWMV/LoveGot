@@ -88,12 +88,19 @@ class _FunctionCardSheetState extends State<FunctionCardSheet>
           GestureDetector(
             onTap: _toggleExpand,
             child: Container(
-              margin: const EdgeInsets.symmetric(vertical: 10),
-              width: 40,
-              height: 5,
-              decoration: BoxDecoration(
-                color: Colors.grey[300],
-                borderRadius: BorderRadius.circular(10),
+              width: double.infinity,
+              child: Column(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.symmetric(vertical: 10),
+                    width: 400,
+                    height: 30,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
