@@ -41,7 +41,7 @@ class _BalanceGameScreenState extends State<BalanceGameScreen> {
               child: Container(
                 height: 40,
                 decoration: const BoxDecoration(
-                  color: Color(0xFFD6D6D6),
+                  color: Color(0xFF8B7E74),
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20),
                     bottomLeft: Radius.circular(20),
@@ -87,7 +87,7 @@ class _BalanceGameScreenState extends State<BalanceGameScreen> {
           width: double.infinity,
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
-            color: const Color(0xFFE0F2FF),
+            color: const Color(0xFFF5EFE6),
             borderRadius: BorderRadius.circular(16),
             boxShadow: [
               BoxShadow(
@@ -112,7 +112,7 @@ class _BalanceGameScreenState extends State<BalanceGameScreen> {
           width: double.infinity,
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
-            color: const Color(0xFFFFE0EB),
+            color: const Color(0xFFF5EFE6),
             borderRadius: BorderRadius.circular(16),
             boxShadow: [
               BoxShadow(
@@ -167,7 +167,7 @@ class _BalanceGameScreenState extends State<BalanceGameScreen> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          backgroundColor: Colors.white,
+          backgroundColor: Color(0xFFE8DCCA),
           elevation: 0,
         ),
         body: SafeArea(
@@ -182,7 +182,7 @@ class _BalanceGameScreenState extends State<BalanceGameScreen> {
                     padding: const EdgeInsets.symmetric(
                         vertical: 16, horizontal: 20),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFFFF1E6),
+                      color: const Color(0xFFE8DCCA),
                       borderRadius: BorderRadius.circular(12),
                       boxShadow: [
                         BoxShadow(
@@ -194,7 +194,7 @@ class _BalanceGameScreenState extends State<BalanceGameScreen> {
                       ],
                     ),
                     child: const Text(
-                      '9시 출근의 정의 어떻게 생각하시나요?',
+                      '남자 소변 앉아서 싸기 vs 서서 싸기',
                       style: TextStyle(
                         fontSize: 20,
                         fontFamily: 'Pretendard',
@@ -204,18 +204,19 @@ class _BalanceGameScreenState extends State<BalanceGameScreen> {
                   ),
                   const SizedBox(height: 16),
                   ExpandableStoryBox(
-                    text:
-                        '요즘 이야기를 나눠보면 보다 의견이 나뉘는 경우가 많더라구요.. \n여러분은 어떤 의견이신지 궁금해서 질문 남겨보아요~~!\n직장인분들이라면 공감하실 거라 생각합니다!',
+                    text: """당신의 사연과 서로의 입장을 적어주세요!\n남자친구와 소변에 대해 싸웠어..
+                    \n화장실 2개 있는 집으로 이사해서 각자\n화장실을 쓰자고 하는데 자금이 그 정도 여유는 되지 않아..
+                    \n어떻게 생각해? """,
                   ),
                   const SizedBox(height: 24),
                   if (!_showResult) ...[
                     _buildOptionButton(
-                      text: '1번 : 9시에 업무 시작이다',
+                      text: '1번 : 앉아 싸기',
                       option: 1,
                     ),
                     const SizedBox(height: 12),
                     _buildOptionButton(
-                      text: '2번 : 9시까지 출근해도 된다!',
+                      text: '2번 : 서서 싸기',
                       option: 2,
                     ),
                     const SizedBox(height: 24),
@@ -259,9 +260,9 @@ class _BalanceGameScreenState extends State<BalanceGameScreen> {
           width: double.infinity,
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
-            border: Border.all(color: Colors.pink[100]!),
+            border: Border.all(color: Color(0xFFF5EFE6)),
             borderRadius: BorderRadius.circular(12),
-            color: Colors.white,
+            color: Color(0xFFE8DCCA),
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -275,7 +276,7 @@ class _BalanceGameScreenState extends State<BalanceGameScreen> {
                       }
                     : null,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.pink[100],
+                  backgroundColor: Color(0xFFE8DCCA),
                   padding: const EdgeInsets.symmetric(
                     horizontal: 32,
                     vertical: 16,
@@ -293,7 +294,7 @@ class _BalanceGameScreenState extends State<BalanceGameScreen> {
                         fontSize: 16,
                         fontFamily: 'Pretendard',
                         fontWeight: FontWeight.w600,
-                        color: Colors.black87,
+                        color: Color(0xFF8B7E74),
                       ),
                     ),
                   ),
@@ -310,7 +311,7 @@ class _BalanceGameScreenState extends State<BalanceGameScreen> {
                       ),
                     ),
                   ),
-                  Icon(Icons.send, color: Colors.pink[100]),
+                  Icon(Icons.send, color: Color(0xFFF5EFE6)),
                 ],
               ),
             ],
@@ -336,10 +337,10 @@ class _BalanceGameScreenState extends State<BalanceGameScreen> {
         width: double.infinity,
         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
         decoration: BoxDecoration(
-          color: isSelected ? Colors.pink[50] : Colors.white,
+          color: isSelected ? Color(0xFFF5EFE6) : Colors.white,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: isSelected ? Colors.pink[200]! : Colors.grey[300]!,
+            color: isSelected ? Color(0xFFE8DCCA) : Colors.grey[300]!,
             width: 2,
           ),
           boxShadow: [
@@ -357,7 +358,7 @@ class _BalanceGameScreenState extends State<BalanceGameScreen> {
             fontSize: 18,
             fontFamily: 'Pretendard',
             fontWeight: FontWeight.w300,
-            color: isSelected ? Colors.pink[900] : Colors.black87,
+            color: isSelected ? Color(0xFF8B7E74) : Color(0xFF8B7E74),
           ),
         ),
       ),
@@ -415,7 +416,7 @@ class _ExpandableStoryBoxState extends State<ExpandableStoryBox>
                     fontSize: 14,
                     fontFamily: 'Pretendard',
                     fontWeight: FontWeight.w500,
-                    color: Colors.pink[300],
+                    color: Color(0xFF8B7E74),
                   ),
                 ),
                 const SizedBox(width: 4),
@@ -423,7 +424,7 @@ class _ExpandableStoryBoxState extends State<ExpandableStoryBox>
                   _expanded
                       ? Icons.keyboard_arrow_up
                       : Icons.keyboard_arrow_down,
-                  color: Colors.pink[300],
+                  color: Color(0xFF8B7E74),
                 ),
               ],
             ),

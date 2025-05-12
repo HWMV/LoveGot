@@ -31,11 +31,11 @@ class _TrainingScreenState extends State<TrainingScreen> {
   Color _getScenarioColor(String id) {
     switch (id) {
       case '001':
-        return const Color(0xFFFFD1DC);
+        return Color(0xFFE8DCCA);
       case '002':
-        return const Color(0xFFB5EAD7);
+        return Color(0xFFE8DCCA);
       case '003':
-        return const Color(0xFFC7CEEA);
+        return Color(0xFFE8DCCA);
       default:
         return const Color(0xFFFFF5F7);
     }
@@ -63,9 +63,9 @@ class _TrainingScreenState extends State<TrainingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFFF5F7),
+      backgroundColor: Color(0xFFF5EFE6),
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xFFD4C2A8),
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios, color: Color(0xFF333333)),
@@ -74,7 +74,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
         title: const Text(
           '긍정 대화법 연습',
           style: TextStyle(
-            color: Color(0xFF333333),
+            color: Color(0xFF8B7E74),
             fontSize: 16,
             fontWeight: FontWeight.bold,
           ),
@@ -200,7 +200,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                              color: Color(0xFF8B7E74),
                             ),
                           ),
                         ),
