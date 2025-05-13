@@ -60,3 +60,5 @@ typing_extensions==4.13.1
 uritemplate==4.1.1
 urllib3==2.4.0
 uvicorn==0.34.0
+langchain==0.1.12
+langchain-openai==0.0.8
