@@ -31,7 +31,12 @@ class _CreateWorryThreadScreenState extends State<CreateWorryThreadScreen> {
     if (text.isEmpty) return;
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const AgentChatScreen()),
+      MaterialPageRoute(
+        builder: (context) => AgentChatScreen(
+          chatType: '고민상담 AI',
+          initialMessage: text,
+        ),
+      ),
     );
   }
 

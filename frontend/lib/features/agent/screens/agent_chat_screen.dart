@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
 class AgentChatScreen extends StatefulWidget {
-  const AgentChatScreen({Key? key}) : super(key: key);
+  final String chatType;
+  final String initialMessage;
+
+  const AgentChatScreen({
+    Key? key,
+    required this.chatType,
+    required this.initialMessage,
+  }) : super(key: key);
 
   @override
   State<AgentChatScreen> createState() => _AgentChatScreenState();
@@ -87,14 +94,44 @@ class _AgentChatScreenState extends State<AgentChatScreen> {
     return Scaffold(
       backgroundColor: primaryBeigeColor,
       appBar: AppBar(
-        title: const Text('갈등 에이전트와의 대화'),
+        title: Text(widget.chatType),
         centerTitle: true,
         backgroundColor: secondaryBeigeColor,
-        foregroundColor: brownColor,
         elevation: 0,
+        foregroundColor: brownColor,
       ),
       body: Column(
         children: [
+          // 상단 이미지 영역 (화면 높이의 1/3)
+          SizedBox(
+            height: MediaQuery.of(context).size.height / 3,
+            child: Stack(
+              children: [
+                // 배경 이미지
+                Positioned.fill(
+                  child: Image.asset(
+                    'assets/images/dialog_bg.png',
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                // 그라데이션 오버레이
+                Positioned.fill(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Colors.transparent,
+                          primaryBeigeColor.withOpacity(0.9),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
           // 메시지 목록
           Expanded(
             child: ListView.builder(

@@ -32,7 +32,12 @@ class _CreateConflictThreadScreenState
     if (text.isEmpty) return;
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const AgentChatScreen()),
+      MaterialPageRoute(
+        builder: (context) => AgentChatScreen(
+          chatType: '갈등상담 AI',
+          initialMessage: text,
+        ),
+      ),
     );
   }
 
