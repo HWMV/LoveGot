@@ -27,7 +27,7 @@ class _FunctionCardSheetState extends State<FunctionCardSheet>
   // 기능 리스트 정의
   final List<Map<String, dynamic>> _functionList = const [
     {'title': '긍정대화법 훈련', 'icon': Icons.chat_bubble_outline},
-    {'title': '공감&상담 에이전트', 'icon': Icons.psychology_outlined},
+    {'title': '상담 AI', 'icon': Icons.psychology_outlined},
     {'title': '커뮤니티', 'icon': Icons.people_outline},
     {'title': '밸런스 게임', 'icon': Icons.compare_arrows},
     {'title': '칭찬카드', 'icon': Icons.card_giftcard},
@@ -141,7 +141,7 @@ class _FunctionCardSheetState extends State<FunctionCardSheet>
               MaterialPageRoute(
                   builder: (context) => const PositiveTalkScreen()),
             );
-          } else if (title == '공감&상담 에이전트') {
+          } else if (title == '상담 AI') {
             Navigator.push(
               context,
               MaterialPageRoute(

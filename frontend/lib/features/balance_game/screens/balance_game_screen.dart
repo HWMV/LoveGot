@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import '../widgets/expandable_story_box.dart';
+import '../widgets/balance_option_button.dart';
+import '../widgets/balance_result_view.dart';
 
 class BalanceGameScreen extends StatefulWidget {
   const BalanceGameScreen({Key? key}) : super(key: key);
@@ -30,113 +33,6 @@ class _BalanceGameScreenState extends State<BalanceGameScreen> {
     });
   }
 
-  Widget _buildResultView() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            Expanded(
-              flex: (_option1Percentage * 10).round(),
-              child: Container(
-                height: 40,
-                decoration: const BoxDecoration(
-                  color: Color(0xFF8B7E74),
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    bottomLeft: Radius.circular(20),
-                  ),
-                ),
-                alignment: Alignment.center,
-                child: Text(
-                  '1번 ${_option1Percentage.toStringAsFixed(1)}%',
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontFamily: 'Pretendard',
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-            ),
-            Expanded(
-              flex: (_option2Percentage * 10).round(),
-              child: Container(
-                height: 40,
-                decoration: const BoxDecoration(
-                  color: Color(0xFFB0B0B0),
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(20),
-                    bottomRight: Radius.circular(20),
-                  ),
-                ),
-                alignment: Alignment.center,
-                child: Text(
-                  '2번 ${_option2Percentage.toStringAsFixed(1)}%',
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontFamily: 'Pretendard',
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 20),
-        Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(20),
-          decoration: BoxDecoration(
-            color: const Color(0xFFF5EFE6),
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.15),
-                spreadRadius: 1,
-                blurRadius: 6,
-                offset: const Offset(0, 3),
-              ),
-            ],
-          ),
-          child: Text(
-            '연인의 선택 답변 : ${_partnerOption}번',
-            style: const TextStyle(
-              fontSize: 18,
-              fontFamily: 'Pretendard',
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ),
-        const SizedBox(height: 16),
-        Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(20),
-          decoration: BoxDecoration(
-            color: const Color(0xFFF5EFE6),
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.15),
-                spreadRadius: 1,
-                blurRadius: 6,
-                offset: const Offset(0, 3),
-              ),
-            ],
-          ),
-          child: Text(
-            '당신의 선택 답변 : ${_selectedOption}번',
-            style: const TextStyle(
-              fontSize: 18,
-              fontFamily: 'Pretendard',
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ),
-        const SizedBox(height: 24),
-      ],
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -160,7 +56,7 @@ class _BalanceGameScreenState extends State<BalanceGameScreen> {
             },
           ),
           title: const Text(
-            '커뮤니티',
+            '밸런스 게임',
             style: TextStyle(
               fontSize: 20,
               fontFamily: 'Pretendard',
@@ -179,45 +75,50 @@ class _BalanceGameScreenState extends State<BalanceGameScreen> {
                 children: [
                   Container(
                     width: double.infinity,
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 16, horizontal: 20),
+                    padding: const EdgeInsets.all(24),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFE8DCCA),
-                      borderRadius: BorderRadius.circular(12),
+                      color: const Color(0xFFF2E8D5),
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(color: Color(0xFFBFAF95), width: 1.5),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.grey.withOpacity(0.15),
-                          spreadRadius: 1,
-                          blurRadius: 8,
-                          offset: const Offset(0, 3),
+                          color: Colors.brown.withOpacity(0.1),
+                          blurRadius: 12,
+                          offset: Offset(0, 4),
                         ),
                       ],
                     ),
                     child: const Text(
                       '남자 소변 앉아서 싸기 vs 서서 싸기',
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
                         fontFamily: 'Pretendard',
-                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF5E5246),
                       ),
+                      textAlign: TextAlign.center,
                     ),
                   ),
                   const SizedBox(height: 16),
                   ExpandableStoryBox(
                     text: """당신의 사연과 서로의 입장을 적어주세요!\n남자친구와 소변에 대해 싸웠어..
-                    \n화장실 2개 있는 집으로 이사해서 각자\n화장실을 쓰자고 하는데 자금이 그 정도 여유는 되지 않아..
-                    \n어떻게 생각해? """,
+                        \n화장실 2개 있는 집으로 이사해서 각자\n화장실을 쓰자고 하는데 자금이 그 정도 여유는 되지 않아..
+                        \n어떻게 생각해? """,
                   ),
                   const SizedBox(height: 24),
                   if (!_showResult) ...[
-                    _buildOptionButton(
+                    BalanceOptionButton(
                       text: '1번 : 앉아 싸기',
                       option: 1,
+                      selectedOption: _selectedOption,
+                      onTap: _onOptionSelected,
                     ),
                     const SizedBox(height: 12),
-                    _buildOptionButton(
+                    BalanceOptionButton(
                       text: '2번 : 서서 싸기',
                       option: 2,
+                      selectedOption: _selectedOption,
+                      onTap: _onOptionSelected,
                     ),
                     const SizedBox(height: 24),
                     const Text(
@@ -248,7 +149,12 @@ class _BalanceGameScreenState extends State<BalanceGameScreen> {
                     ),
                     const SizedBox(height: 16),
                   ] else ...[
-                    _buildResultView(),
+                    BalanceResultView(
+                      option1Percentage: _option1Percentage,
+                      option2Percentage: _option2Percentage,
+                      partnerOption: _partnerOption,
+                      selectedOption: _selectedOption,
+                    ),
                   ],
                   const SizedBox(height: 16),
                 ],
@@ -303,133 +209,27 @@ class _BalanceGameScreenState extends State<BalanceGameScreen> {
               const SizedBox(height: 12),
               Row(
                 children: [
-                  const Expanded(
+                  IconButton(
+                    icon: Icon(Icons.emoji_emotions_outlined,
+                        color: Color(0xFF8B7E74)),
+                    onPressed: () {},
+                  ),
+                  Expanded(
                     child: TextField(
                       decoration: InputDecoration(
                         hintText: '여러분의 생각을 적어주세요!',
                         border: InputBorder.none,
                       ),
+                      maxLines: null,
+                      keyboardType: TextInputType.multiline,
                     ),
                   ),
-                  Icon(Icons.send, color: Color(0xFFF5EFE6)),
+                  Icon(Icons.send, color: Color(0xFF8B7E74)),
                 ],
               ),
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildOptionButton({
-    required String text,
-    required int option,
-  }) {
-    final bool isSelected = _selectedOption == option;
-
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          _selectedOption = option;
-        });
-      },
-      child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-        decoration: BoxDecoration(
-          color: isSelected ? Color(0xFFF5EFE6) : Colors.white,
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(
-            color: isSelected ? Color(0xFFE8DCCA) : Colors.grey[300]!,
-            width: 2,
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.1),
-              spreadRadius: 1,
-              blurRadius: 4,
-              offset: const Offset(0, 2),
-            ),
-          ],
-        ),
-        child: Text(
-          text,
-          style: TextStyle(
-            fontSize: 18,
-            fontFamily: 'Pretendard',
-            fontWeight: FontWeight.w300,
-            color: isSelected ? Color(0xFF8B7E74) : Color(0xFF8B7E74),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class ExpandableStoryBox extends StatefulWidget {
-  final String text;
-
-  const ExpandableStoryBox({Key? key, required this.text}) : super(key: key);
-
-  @override
-  State<ExpandableStoryBox> createState() => _ExpandableStoryBoxState();
-}
-
-class _ExpandableStoryBoxState extends State<ExpandableStoryBox>
-    with TickerProviderStateMixin {
-  bool _expanded = false;
-
-  void _toggleExpanded() {
-    setState(() {
-      _expanded = !_expanded;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedSize(
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeInOut,
-      alignment: Alignment.topCenter,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            widget.text,
-            style: const TextStyle(
-              fontSize: 18,
-              fontFamily: 'Pretendard',
-              fontWeight: FontWeight.normal,
-            ),
-            maxLines: _expanded ? null : 2,
-            overflow: TextOverflow.fade,
-          ),
-          const SizedBox(height: 4),
-          GestureDetector(
-            onTap: _toggleExpanded,
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  _expanded ? '접기' : '더보기',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontFamily: 'Pretendard',
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xFF8B7E74),
-                  ),
-                ),
-                const SizedBox(width: 4),
-                Icon(
-                  _expanded
-                      ? Icons.keyboard_arrow_up
-                      : Icons.keyboard_arrow_down,
-                  color: Color(0xFF8B7E74),
-                ),
-              ],
-            ),
-          ),
-        ],
       ),
     );
   }
