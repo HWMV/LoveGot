@@ -106,6 +106,42 @@ class _WritePostScreenState extends State<WritePostScreen> {
             ),
             const SizedBox(height: 16),
 
+            // 첫번째 질문 입력 필드
+            TextField(
+              decoration: InputDecoration(
+                hintText: '첫번째 질문을 입력하세요',
+                filled: true,
+                fillColor: Colors.white,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: BorderSide(color: accentBeigeColor),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: BorderSide(color: brownColor),
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+
+            // 두번째 질문 입력 필드
+            TextField(
+              decoration: InputDecoration(
+                hintText: '두번째 질문을 입력하세요',
+                filled: true,
+                fillColor: Colors.white,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: BorderSide(color: accentBeigeColor),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: BorderSide(color: brownColor),
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+
             // 내용 입력 필드
             TextField(
               controller: _contentController,
@@ -129,7 +165,7 @@ class _WritePostScreenState extends State<WritePostScreen> {
             // 사진 추가 영역 (선택사항)
             Container(
               width: double.infinity,
-              height: 100,
+              height: 50,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(8),
