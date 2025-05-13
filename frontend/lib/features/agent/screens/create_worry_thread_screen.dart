@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'agent_chat_screen.dart';
 
-class AgentThreadCreateScreen extends StatefulWidget {
-  const AgentThreadCreateScreen({Key? key}) : super(key: key);
+class CreateWorryThreadScreen extends StatefulWidget {
+  const CreateWorryThreadScreen({Key? key}) : super(key: key);
 
   @override
-  State<AgentThreadCreateScreen> createState() =>
-      _AgentThreadCreateScreenState();
+  State<CreateWorryThreadScreen> createState() =>
+      _CreateWorryThreadScreenState();
 }
 
-class _AgentThreadCreateScreenState extends State<AgentThreadCreateScreen> {
-  String _selectedCategory = '고민상담';
+class _CreateWorryThreadScreenState extends State<CreateWorryThreadScreen> {
   final TextEditingController _controller = TextEditingController();
 
   // 앱 전체에서 사용할 베이지 계열 색상 정의
@@ -20,19 +19,11 @@ class _AgentThreadCreateScreenState extends State<AgentThreadCreateScreen> {
   static const Color brownColor = Color(0xFF8B7E74); // 갈색 (포인트 색상)
   static const Color lightWarmBeigeColor =
       Color(0xFFF7E6D5); // 따뜻한 연한 베이지 (고민상담)
-  static const Color lightCoolBeigeColor =
-      Color(0xFFECE8E1); // 차가운 연한 베이지 (갈등상담)
 
   @override
   void dispose() {
     _controller.dispose();
     super.dispose();
-  }
-
-  void _onCategoryTap(String category) {
-    setState(() {
-      _selectedCategory = category;
-    });
   }
 
   void _onStartChat() {
@@ -49,7 +40,7 @@ class _AgentThreadCreateScreenState extends State<AgentThreadCreateScreen> {
     return Scaffold(
       backgroundColor: primaryBeigeColor,
       appBar: AppBar(
-        title: const Text('고민&상담 에이전트'),
+        title: const Text('고민상담 AI'),
         centerTitle: true,
         backgroundColor: secondaryBeigeColor,
         elevation: 0,
@@ -60,21 +51,12 @@ class _AgentThreadCreateScreenState extends State<AgentThreadCreateScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _buildCategoryButton('고민상담', lightWarmBeigeColor),
-                const SizedBox(width: 16),
-                _buildCategoryButton('갈등상담', lightCoolBeigeColor),
-              ],
-            ),
-            const SizedBox(height: 32),
             TextField(
               controller: _controller,
               minLines: 5,
               maxLines: 8,
               decoration: InputDecoration(
-                hintText: '고민이나 갈등 상황을 상세히 적어주세요!',
+                hintText: '고민 상황을 상세히 적어주세요!',
                 hintStyle: TextStyle(color: brownColor.withOpacity(0.6)),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(16),
@@ -89,7 +71,7 @@ class _AgentThreadCreateScreenState extends State<AgentThreadCreateScreen> {
                   borderSide: BorderSide(color: brownColor, width: 2),
                 ),
                 filled: true,
-                fillColor: secondaryBeigeColor.withOpacity(0.3),
+                fillColor: lightWarmBeigeColor.withOpacity(0.3),
               ),
             ),
             const SizedBox(height: 32),
@@ -106,45 +88,6 @@ class _AgentThreadCreateScreenState extends State<AgentThreadCreateScreen> {
                   style: TextStyle(fontSize: 18, color: Colors.white)),
             ),
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildCategoryButton(String label, Color color) {
-    final isSelected = _selectedCategory == label;
-    return Expanded(
-      child: GestureDetector(
-        onTap: () => _onCategoryTap(label),
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
-          padding: const EdgeInsets.symmetric(vertical: 24),
-          decoration: BoxDecoration(
-            color: color,
-            borderRadius: BorderRadius.circular(16),
-            border: isSelected
-                ? Border.all(color: brownColor, width: 3)
-                : Border.all(color: accentBeigeColor, width: 1),
-            boxShadow: isSelected
-                ? [
-                    BoxShadow(
-                      color: brownColor.withOpacity(0.2),
-                      blurRadius: 8,
-                      offset: const Offset(0, 4),
-                    ),
-                  ]
-                : [],
-          ),
-          child: Center(
-            child: Text(
-              label,
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: isSelected ? brownColor : brownColor.withOpacity(0.7),
-              ),
-            ),
-          ),
         ),
       ),
     );

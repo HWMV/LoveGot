@@ -4,6 +4,9 @@ import '../widgets/couple_avatar_widget.dart';
 import '../../../shared/widgets/bottom_nav_bar.dart';
 import '../../request_card/screens/request_modal.dart';
 import '../widgets/compliment_dialog.dart';
+import '../../balance_game/screens/balance_game_screen.dart';
+import '../../community/screens/community_screen.dart';
+import '../../positive_talk/screens/positive_talk_screen.dart';
 import '../widgets/function_card_sheet.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -117,6 +120,51 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildFunctionCard(String title, IconData icon) {
+    return Card(
+      elevation: 2,
+      margin: const EdgeInsets.symmetric(vertical: 8),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: ListTile(
+        leading: Icon(icon, color: brownColor),
+        title: Text(
+          title,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.black87,
+          ),
+        ),
+        onTap: () {
+          // 기능 항목 클릭 시 해당 화면으로 이동
+          if (title == '커뮤니티') {
+            // 커뮤니티 화면으로 이동
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const CommunityScreen()),
+            );
+          } else if (title == '긍정대화법 훈련') {
+            // 긍정대화법 훈련 화면으로 이동
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const PositiveTalkScreen()),
+            );
+          } else if (title == '밸런스 게임') {
+            // 밸런스 게임 화면으로 이동
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const BalanceGameScreen()),
+            );
+          } else {
+            // 기타 기능
+            print('Selected feature: $title');
+          }
+        },
       ),
     );
   }
