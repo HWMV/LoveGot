@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'agent_chat_screen.dart';
+import '../services/thread_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class CreateWorryThreadScreen extends StatefulWidget {
   const CreateWorryThreadScreen({Key? key}) : super(key: key);
@@ -11,6 +13,9 @@ class CreateWorryThreadScreen extends StatefulWidget {
 
 class _CreateWorryThreadScreenState extends State<CreateWorryThreadScreen> {
   final TextEditingController _controller = TextEditingController();
+  final ThreadService _threadService = ThreadService();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  bool _isLoading = false;
 
   // 앱 전체에서 사용할 베이지 계열 색상 정의
   static const Color primaryBeigeColor = Color(0xFFF5EFE6); // 밝은 베이지 (배경색)
@@ -26,18 +31,62 @@ class _CreateWorryThreadScreenState extends State<CreateWorryThreadScreen> {
     super.dispose();
   }
 
-  void _onStartChat() {
+  Future<void> _onStartChat() async {
     final text = _controller.text.trim();
     if (text.isEmpty) return;
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => AgentChatScreen(
-          chatType: '고민상담 AI',
-          initialMessage: text,
+
+    // Firebase 인증 상태 확인
+    final user = _auth.currentUser;
+    if (user == null) {
+      if (!mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('로그인이 필요합니다.'),
+          backgroundColor: Colors.red,
         ),
-      ),
-    );
+      );
+      return;
+    }
+
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      final response = await _threadService.createThread(
+        userInput: text,
+      );
+
+      if (!mounted) return;
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => AgentChatScreen(
+            chatType: '고민상담 AI',
+            initialMessage: text,
+            threadId: response['thread_id'],
+            initialResponse: response['initial_response'],
+          ),
+        ),
+      );
+    } catch (e) {
+      if (!mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('오류가 발생했습니다: ${e.toString()}'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    }
   }
 
   @override
@@ -81,7 +130,7 @@ class _CreateWorryThreadScreenState extends State<CreateWorryThreadScreen> {
             ),
             const SizedBox(height: 32),
             ElevatedButton(
-              onPressed: _onStartChat,
+              onPressed: _isLoading ? null : _onStartChat,
               style: ElevatedButton.styleFrom(
                 backgroundColor: brownColor,
                 shape: RoundedRectangleBorder(
@@ -89,8 +138,17 @@ class _CreateWorryThreadScreenState extends State<CreateWorryThreadScreen> {
                 ),
                 padding: const EdgeInsets.symmetric(vertical: 16),
               ),
-              child: const Text('채팅 시작',
-                  style: TextStyle(fontSize: 18, color: Colors.white)),
+              child: _isLoading
+                  ? const SizedBox(
+                      height: 20,
+                      width: 20,
+                      child: CircularProgressIndicator(
+                        color: Colors.white,
+                        strokeWidth: 2,
+                      ),
+                    )
+                  : const Text('채팅 시작',
+                      style: TextStyle(fontSize: 18, color: Colors.white)),
             ),
           ],
         ),

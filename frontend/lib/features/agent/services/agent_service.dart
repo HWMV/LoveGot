@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import '../../../core/config/env.dart';
 
 enum AgentType {
   worry, // 고민상담
@@ -7,7 +8,7 @@ enum AgentType {
 }
 
 class AgentService {
-  static const String baseUrl = 'YOUR_BACKEND_API_URL';
+  static String get baseUrl => Env.apiUrl;
 
   // 에이전트 타입에 따른 엔드포인트 매핑
   static final Map<AgentType, String> _endpoints = {
