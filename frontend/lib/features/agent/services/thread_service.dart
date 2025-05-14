@@ -31,7 +31,7 @@ class ThreadService {
       );
 
       if (response.statusCode == 200) {
-        return jsonDecode(response.body);
+        return jsonDecode(utf8.decode(response.bodyBytes));
       } else {
         throw Exception('Failed to create thread');
       }
@@ -51,25 +51,36 @@ class ThreadService {
         throw Exception('인증 토큰이 없습니다. 로그인이 필요합니다.');
       }
 
+      // 요청 데이터 디버깅
+      final requestBody = {
+        'thread_id': threadId,
+        'user_input': message,
+      };
+
       final response = await http.post(
         Uri.parse('${baseUrl}/agent/counseling'),
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json; charset=utf-8',
+          'Accept': 'application/json; charset=utf-8',
           'Authorization': 'Bearer $token',
         },
-        body: jsonEncode({
-          'thread_id': threadId,
-          'user_input': message,
-        }),
+        body: utf8.encode(jsonEncode(requestBody)),
       );
 
       if (response.statusCode == 200) {
-        return jsonDecode(response.body);
+        final decodedResponse = jsonDecode(utf8.decode(response.bodyBytes));
+        if (decodedResponse == null ||
+            !decodedResponse.containsKey('response')) {
+          throw Exception('서버 응답이 올바르지 않습니다.');
+        }
+        return decodedResponse;
       } else {
-        throw Exception('Failed to send message');
+        final errorBody = jsonDecode(utf8.decode(response.bodyBytes));
+        throw Exception(errorBody['detail'] ?? '메시지 전송에 실패했습니다.');
       }
     } catch (e) {
-      throw Exception('Error sending message: $e');
+      print('Error occurred: $e');
+      throw Exception('메시지 전송 중 오류가 발생했습니다: $e');
     }
   }
 }
