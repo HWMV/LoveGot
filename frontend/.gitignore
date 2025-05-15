@@ -68,3 +68,7 @@ app.*.map.json
 !frontend/assets/images/*.gif
 *.svg
 !frontend/assets/images/*.svg
+
+# 비디오 관련
+*.mp4
+!frontend/assets/videos/*.mp4
