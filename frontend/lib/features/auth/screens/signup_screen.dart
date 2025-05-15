@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../service/auth_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../../../shared/widgets/primary_button.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -13,7 +13,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _nicknameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _authService = AuthService();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   bool _isLoading = false;
 
   Future<void> _signUp() async {
@@ -29,11 +29,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
     setState(() => _isLoading = true);
 
     try {
-      await _authService.signUp(
-        _nicknameController.text,
-        _emailController.text,
-        _passwordController.text,
+      // Firebase 회원가입
+      final userCredential = await _auth.createUserWithEmailAndPassword(
+        email: _emailController.text,
+        password: _passwordController.text,
       );
+
+      // 사용자 프로필 업데이트
+      await userCredential.user?.updateDisplayName(_nicknameController.text);
+
       if (mounted) {
         Navigator.pop(context);
       }
