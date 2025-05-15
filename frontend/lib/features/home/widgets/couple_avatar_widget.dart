@@ -58,7 +58,7 @@ class CoupleAvatarWidget extends StatelessWidget {
                     Transform.translate(
                       offset: Offset(avatarSpacing, -topOffset),
                       child: Image.asset(
-                        'assets/images/woman_avatar1.png',
+                        'assets/images/man_avatar1.png',
                         height: avatarHeight,
                         fit: BoxFit.contain,
                       ),
@@ -67,7 +67,7 @@ class CoupleAvatarWidget extends StatelessWidget {
                     Transform.translate(
                       offset: Offset(-avatarSpacing, -topOffset),
                       child: Image.asset(
-                        'assets/images/man_avatar1.png',
+                        'assets/images/woman_avatar1.png',
                         height: avatarHeight,
                         fit: BoxFit.contain,
                       ),

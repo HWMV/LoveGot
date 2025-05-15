@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../shared/widgets/bottom_nav_bar.dart';
 import '../../home/screens/home_screen.dart';
+import 'write_post_screen.dart';
 
 class CommunityScreen extends StatefulWidget {
   const CommunityScreen({Key? key}) : super(key: key);
@@ -20,6 +21,12 @@ class _CommunityScreenState extends State<CommunityScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final List<Map<String, String>> posts = [
+      {'title': '[연애 고민] 애인이 톡 답장을 너무 늦게 해요', 'author': '익명', 'views': '302'},
+      {'title': '[데이트 장소] 첫 데이트 어디가 좋을까요?', 'author': '러브러브', 'views': '187'},
+      {'title': '[이별 고민] 잡아야 할까요 보내줘야 할까요', 'author': '익명', 'views': '456'},
+    ];
+
     return Scaffold(
       backgroundColor: primaryBeigeColor,
       appBar: AppBar(
@@ -51,276 +58,51 @@ class _CommunityScreenState extends State<CommunityScreen> {
       ),
       body: Column(
         children: [
-          // 투표 현황 위젯
-          Container(
-            margin: const EdgeInsets.all(16),
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: secondaryBeigeColor,
-              borderRadius: BorderRadius.circular(12),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.1),
-                  spreadRadius: 1,
-                  blurRadius: 6,
-                  offset: const Offset(0, 2),
-                ),
-              ],
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  '⏰ 아침형 인간 vs 저녁형 인간',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontFamily: 'Pretendard',
-                    fontWeight: FontWeight.bold,
-                    color: brownColor,
-                  ),
-                ),
-                const SizedBox(height: 16),
-                Container(
-                  height: 40,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: primaryBeigeColor,
-                  ),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        flex: 30,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.horizontal(
-                                left: Radius.circular(20)),
-                            color: accentBeigeColor,
-                          ),
-                          alignment: Alignment.center,
-                          child: const Text(
-                            '30%',
-                            style: TextStyle(
-                              color: brownColor,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        flex: 70,
-                        child: Container(
-                          alignment: Alignment.center,
-                          child: const Text(
-                            '70%',
-                            style: TextStyle(
-                              color: brownColor,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 8),
-                const Text(
-                  '응답자: 709명',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: brownColor,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: secondaryBeigeColor,
-              borderRadius: BorderRadius.circular(12),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.1),
-                  spreadRadius: 1,
-                  blurRadius: 6,
-                  offset: const Offset(0, 2),
-                ),
-              ],
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  '🌅 아침 9시까지 출근 vs 9시에 업무 시작',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontFamily: 'Pretendard',
-                    fontWeight: FontWeight.bold,
-                    color: brownColor,
-                  ),
-                ),
-                const SizedBox(height: 16),
-                Container(
-                  height: 40,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: primaryBeigeColor,
-                  ),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        flex: 45,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.horizontal(
-                                left: Radius.circular(20)),
-                            color: accentBeigeColor,
-                          ),
-                          alignment: Alignment.center,
-                          child: const Text(
-                            '45%',
-                            style: TextStyle(
-                              color: brownColor,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        flex: 55,
-                        child: Container(
-                          alignment: Alignment.center,
-                          child: const Text(
-                            '55%',
-                            style: TextStyle(
-                              color: brownColor,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 8),
-                const Text(
-                  '응답자: 512명',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: brownColor,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: secondaryBeigeColor,
-              borderRadius: BorderRadius.circular(12),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.1),
-                  spreadRadius: 1,
-                  blurRadius: 6,
-                  offset: const Offset(0, 2),
-                ),
-              ],
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  '🍽️ 밥 먹고 바로 설거지하기 vs 조금 쉬었다가 집안일 몰아서 하기',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontFamily: 'Pretendard',
-                    fontWeight: FontWeight.bold,
-                    color: brownColor,
-                  ),
-                ),
-                const SizedBox(height: 16),
-                Container(
-                  height: 40,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: primaryBeigeColor,
-                  ),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        flex: 60,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.horizontal(
-                                left: Radius.circular(20)),
-                            color: accentBeigeColor,
-                          ),
-                          alignment: Alignment.center,
-                          child: const Text(
-                            '60%',
-                            style: TextStyle(
-                              color: brownColor,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        flex: 40,
-                        child: Container(
-                          alignment: Alignment.center,
-                          child: const Text(
-                            '40%',
-                            style: TextStyle(
-                              color: brownColor,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 8),
-                const Text(
-                  '응답자: 423명',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: brownColor,
-                  ),
-                ),
-              ],
-            ),
-          ),
-
-          // 더 많은 투표를 보려면
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: TextButton(
-              onPressed: () {
-                // TODO: 더 많은 투표 화면으로 이동
-              },
-              style: TextButton.styleFrom(
-                foregroundColor: brownColor,
-              ),
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    '더 많은 투표 보기',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
+          ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: posts.length,
+            itemBuilder: (context, index) {
+              final post = posts[index];
+              return Container(
+                margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: secondaryBeigeColor,
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.1),
+                      spreadRadius: 1,
+                      blurRadius: 6,
+                      offset: const Offset(0, 2),
                     ),
-                  ),
-                  SizedBox(width: 8),
-                  Icon(Icons.arrow_forward_ios, size: 16),
-                ],
-              ),
-            ),
+                  ],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      post['title']!,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontFamily: 'Pretendard',
+                        fontWeight: FontWeight.bold,
+                        color: brownColor,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      '${post['author']} · 조회수 ${post['views']}',
+                      style: const TextStyle(
+                        fontSize: 14,
+                        color: brownColor,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
           ),
 
           // 댓글 섹션
@@ -361,7 +143,10 @@ class _CommunityScreenState extends State<CommunityScreen> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: accentBeigeColor,
         onPressed: () {
-          // TODO: Implement post creation navigation
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const WritePostScreen()),
+          );
         },
         child: Icon(Icons.add, color: brownColor),
       ),

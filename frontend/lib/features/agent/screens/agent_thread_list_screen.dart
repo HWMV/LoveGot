@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'agent_thread_create_screen.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'create_conflict_thread_screen.dart';
+import 'create_worry_thread_screen.dart';
 
 class AgentThreadListScreen extends StatelessWidget {
   const AgentThreadListScreen({Key? key}) : super(key: key);
@@ -68,16 +70,41 @@ class AgentThreadListScreen extends StatelessWidget {
           );
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => const AgentThreadCreateScreen()),
-          );
-        },
+      floatingActionButton: SpeedDial(
         backgroundColor: brownColor,
-        child: const Icon(Icons.edit, color: Colors.white),
+        activeBackgroundColor: brownColor.withOpacity(0.8),
+        icon: Icons.edit,
+        activeIcon: Icons.close,
+        children: [
+          SpeedDialChild(
+            child: const Icon(Icons.people, color: Colors.white),
+            backgroundColor: lightCoolBeigeColor,
+            label: '갈등상담 AI',
+            labelStyle: TextStyle(color: brownColor),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const CreateConflictThreadScreen(),
+                ),
+              );
+            },
+          ),
+          SpeedDialChild(
+            child: const Icon(Icons.psychology, color: Colors.white),
+            backgroundColor: lightWarmBeigeColor,
+            label: '고민상담 AI',
+            labelStyle: TextStyle(color: brownColor),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const CreateWorryThreadScreen(),
+                ),
+              );
+            },
+          ),
+        ],
       ),
     );
   }
