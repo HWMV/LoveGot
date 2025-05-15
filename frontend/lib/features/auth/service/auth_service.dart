@@ -107,7 +107,16 @@ class AuthService {
 
   // 로그아웃
   Future<void> signOut() async {
-    await _auth.signOut();
-    await deleteToken();
+    try {
+      // Firebase 로그아웃
+      await _auth.signOut();
+      // 토큰 삭제
+      await deleteToken();
+      // 모든 SharedPreferences 데이터 삭제
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.clear();
+    } catch (e) {
+      throw Exception('로그아웃 중 오류가 발생했습니다: $e');
+    }
   }
 }

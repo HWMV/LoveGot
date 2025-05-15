@@ -5,6 +5,7 @@ import 'features/auth/screens/login_screen.dart';
 import 'features/auth/screens/signup_screen.dart';
 import 'features/home/screens/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'features/auth/service/auth_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,8 +13,8 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  final user = FirebaseAuth.instance.currentUser;
-  print('🔥 초기 로그인 유저: ${user?.uid}');
+  // Firebase 영구 인증 상태 비활성화
+  await FirebaseAuth.instance.setPersistence(Persistence.NONE);
 
   runApp(const LoveGot());
 }
@@ -29,14 +30,14 @@ class LoveGot extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: StreamBuilder<User?>(
-        stream: FirebaseAuth.instance.authStateChanges(),
+      home: FutureBuilder<bool>(
+        future: AuthService().hasToken(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           }
 
-          if (snapshot.hasData) {
+          if (snapshot.hasData == true) {
             return const HomeScreen();
           }
 
