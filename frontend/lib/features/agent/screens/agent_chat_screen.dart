@@ -60,7 +60,7 @@ class _AgentChatScreenState extends State<AgentChatScreen> {
       ChatMessage(
         text: widget.initialResponse,
         isUser: false,
-        sender: 'GotAI',
+        sender: 'Got박사님',
       ),
     ];
   }
