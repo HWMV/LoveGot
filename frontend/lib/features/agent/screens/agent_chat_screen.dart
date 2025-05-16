@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../services/thread_service.dart';
+import 'package:video_player/video_player.dart';
 
 class ChatMessage {
   final String text;
@@ -47,6 +48,7 @@ class _AgentChatScreenState extends State<AgentChatScreen> {
   final ThreadService _threadService = ThreadService();
   bool _isLoading = false;
   List<ChatMessage> _messages = [];
+  late VideoPlayerController _videoController;
 
   @override
   void initState() {
@@ -63,11 +65,22 @@ class _AgentChatScreenState extends State<AgentChatScreen> {
         sender: 'GotAI',
       ),
     ];
+
+    _initializeVideo();
+  }
+
+  Future<void> _initializeVideo() async {
+    _videoController =
+        VideoPlayerController.asset('assets/videos/exam_Ngannou1.mp4');
+    await _videoController.initialize();
+    _videoController.setLooping(true);
+    _videoController.play();
   }
 
   @override
   void dispose() {
     _controller.dispose();
+    _videoController.dispose();
     super.dispose();
   }
 
@@ -118,6 +131,32 @@ class _AgentChatScreenState extends State<AgentChatScreen> {
       ),
       body: Column(
         children: [
+          // Video Player Section
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 4,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: AspectRatio(
+                  aspectRatio: 1 / 1,
+                  child: VideoPlayer(_videoController),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 16), // Add spacing between video and chat
+          // Chat Messages Section
           Expanded(
             child: ListView.builder(
               padding: const EdgeInsets.all(16),
